@@ -13,10 +13,14 @@ return new class extends Migration
     {
         Schema::create('visitas', function (Blueprint $table) {
             $table->id('id_visita');
-            $table->foreignId('id_propiedad')->constrained('propiedades')->onDelete('cascade');
-            $table->foreignId('id_usuario')->constrained('usuarios')->onDelete('cascade');
+            $table->unsignedBigInteger('id_propiedad');
+            $table->unsignedBigInteger('id_usuario');
             $table->datetime('fecha_visita');
             $table->text('comentario')->nullable();
+
+            // Definir las llaves foráneas
+            $table->foreign('id_propiedad')->references('id_propiedad')->on('propiedades')->onDelete('cascade');
+            $table->foreign('id_usuario')->references('id_usuario')->on('usuarios')->onDelete('cascade');
         });
     }
 
@@ -24,7 +28,8 @@ return new class extends Migration
      * Reverse the migrations.
      */
     public function down(): void
-    {
+    {        
         Schema::dropIfExists('visitas');
     }
 };
+

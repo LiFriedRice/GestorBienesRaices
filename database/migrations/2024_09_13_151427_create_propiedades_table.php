@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('propiedades', function (Blueprint $table) {
             $table->id('id_propiedad');
-            $table->foreignId('id_usuario')->constrained('usuarios')->onDelete('cascade');
+            $table->unsignedBigInteger('id_usuario'); // Define la columna de clave foránea
             $table->string('titulo', 255);
             $table->text('descripcion');
             $table->enum('tipo_propiedad', ['comercial', 'residencial']);
@@ -27,13 +27,16 @@ return new class extends Migration
             $table->integer('baños')->default(0);
             $table->integer('parqueos')->default(0);
             $table->integer('pisos')->default(0);
-            $table->point('geolocalizacion');
+            $table->string('geolocalizacion'); // Change to string or text if point is not supported
             $table->string('tipo_suelo', 50);
             $table->string('servicios_comunitarios', 255);
             $table->decimal('gastos_comunes', 10, 2);
             $table->enum('estado_inmueble', ['a estrenar', 'usado']);
             $table->enum('entrega', ['inmediata', 'otra_fecha']);
             $table->timestamp('fecha_publicacion');
+            
+
+            $table->foreign('id_usuario')->references('id_usuario')->on('usuarios')->onDelete('cascade');
         });
     }
 

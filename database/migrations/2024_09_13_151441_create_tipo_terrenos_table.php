@@ -11,11 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tipos_terrenos', function (Blueprint $table) {
+        Schema::create('tipo_terrenos', function (Blueprint $table) {
             $table->id('id_tipo_terreno');
-            $table->foreignId('id_propiedad')->constrained('propiedades')->onDelete('cascade');
+            $table->unsignedBigInteger('id_propiedad');
             $table->enum('nombre_tipo_terreno', ['casa', 'terreno', 'departamento', 'local_comercial', 'oficina']);
             $table->enum('nombre_categoria', ['alquiler', 'venta', 'compra']);
+
+            $table->foreign('id_propiedad')->references('id_propiedad')->on('propiedades')->onDelete('cascade');
         });
     }
 
