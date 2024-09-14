@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id('id_favorito');
             $table->foreignId('id_usuario')->constrained('usuarios')->onDelete('cascade');
             $table->foreignId('id_propiedad')->constrained('propiedades')->onDelete('cascade');
-            $table->timestamp('fechaagregado')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('fecha_agregado');
         });
     }
 

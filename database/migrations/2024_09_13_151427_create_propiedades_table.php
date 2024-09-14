@@ -33,7 +33,7 @@ return new class extends Migration
             $table->decimal('gastos_comunes', 10, 2);
             $table->enum('estado_inmueble', ['a estrenar', 'usado']);
             $table->enum('entrega', ['inmediata', 'otra_fecha']);
-            $table->timestamp('fecha_publicacion')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('fecha_publicacion');
         });
     }
 

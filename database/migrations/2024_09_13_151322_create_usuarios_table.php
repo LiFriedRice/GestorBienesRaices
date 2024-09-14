@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('direccion', 255);
             $table->enum('tipo_usuario', ['admin', 'cliente', 'agente', 'propietario']);
             $table->boolean('verificado')->default(false);
-            $table->timestamp('fecha_registro')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('fecha_registro');
             $table->string('contraseña', 255);
             $table->datetime('ultimo_acceso')->nullable();
             $table->enum('estado_cuenta', ['activa', 'suspendida', 'eliminada'])->default('activa');

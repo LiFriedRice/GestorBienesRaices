@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('id_usuario_destinatario')->constrained('usuarios')->onDelete('cascade');
             $table->foreignId('id_propiedad')->constrained('propiedades')->onDelete('cascade');
             $table->text('mensaje');
-            $table->timestamp('fecha_envio')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('fecha_envio');
         });
     }
 

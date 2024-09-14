@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('id_propiedad')->constrained('propiedades')->onDelete('cascade');
             $table->integer('calificacion')->default(5);
             $table->text('comentario')->nullable();
-            $table->timestamp('fecha_reseña')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('fecha_reseña');
         });
     }
 

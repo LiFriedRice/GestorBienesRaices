@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('id_usuario')->constrained('usuarios')->onDelete('cascade');
             $table->decimal('monto', 15, 2);
             $table->enum('metodo_pago', ['tarjeta_credito', 'transferencia', 'paypal']);
-            $table->timestamp('fecha_pago')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('fecha_pago');
         });
     }
 

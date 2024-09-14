@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id('id_notificacion');
             $table->foreignId('id_usuario')->constrained('usuarios')->onDelete('cascade');
             $table->string('mensaje', 255);
-            $table->timestamp('fecha_envio')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('fecha_envio');
             $table->boolean('leido')->default(false);
         });
     }

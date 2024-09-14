@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('id_propiedad')->constrained('propiedades')->onDelete('cascade');
             $table->enum('estado_anterior', ['disponible', 'en negociacion', 'vendida', 'alquilada']);
             $table->enum('estado_nuevo', ['disponible', 'en negociacion', 'vendida', 'alquilada']);
-            $table->timestamp('fecha_cambio')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('fecha_cambio');
         });
     }
 
