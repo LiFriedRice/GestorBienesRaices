@@ -11,11 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('fotos_videos', function (Blueprint $table) {
+        Schema::create('foto_videos', function (Blueprint $table) {
             $table->id('id_media');
-            $table->foreignId('id_propiedad')->constrained('propiedades')->onDelete('cascade');
+            $table->unsignedBigInteger('id_propiedad');
             $table->string('url_media', 255);
             $table->enum('tipo_media', ['foto', 'video']);
+
+            $table->foreign('id_propiedad')->references('id_propiedad')->on('propiedades')->onDelete('cascade');
         });
     }
 

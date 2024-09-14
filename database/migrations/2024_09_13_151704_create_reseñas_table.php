@@ -13,11 +13,14 @@ return new class extends Migration
     {
         Schema::create('reseñas', function (Blueprint $table) {
             $table->id('id_reseña');
-            $table->foreignId('id_usuario')->constrained('usuarios')->onDelete('cascade');
-            $table->foreignId('id_propiedad')->constrained('propiedades')->onDelete('cascade');
+            $table->unsignedBigInteger('id_usuario');
+            $table->unsignedBigInteger('id_propiedad');
             $table->integer('calificacion')->default(5);
             $table->text('comentario')->nullable();
             $table->timestamp('fecha_reseña');
+
+            $table->foreign('id_propiedad')->references('id_propiedad')->on('propiedades')->onDelete('cascade');
+            $table->foreign('id_usuario')->references('id_usuario')->on('usuarios')->onDelete('cascade');
         });
     }
 

@@ -13,9 +13,12 @@ return new class extends Migration
     {
         Schema::create('favoritos', function (Blueprint $table) {
             $table->id('id_favorito');
-            $table->foreignId('id_usuario')->constrained('usuarios')->onDelete('cascade');
-            $table->foreignId('id_propiedad')->constrained('propiedades')->onDelete('cascade');
+            $table->unsignedBigInteger('id_usuario');
+            $table->unsignedBigInteger('id_propiedad');
             $table->timestamp('fecha_agregado');
+
+            $table->foreign('id_usuario')->references('id_usuario')->on('usuarios')->onDelete('cascade');
+            $table->foreign('id_propiedad')->references('id_propiedad')->on('propiedades')->onDelete('cascade');
         });
     }
 

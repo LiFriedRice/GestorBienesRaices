@@ -11,13 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('auditoria', function (Blueprint $table) {
+        Schema::create('auditorias', function (Blueprint $table) {
             $table->id('id_auditoria'); // ID de la auditoría
-            $table->foreign('id_usuario')->references('id_usuario')->on('usuarios')->onDelete('cascade');
+            $table->unsignedBigInteger('id_usuario');
             $table->string('accion', 255); // Acción realizada
             $table->timestamp('fecha_accion'); // Fecha de la acción
             $table->text('detalles'); // Detalles adicionales sobre la acción
             $table->timestamps();
+
+            $table->foreign('id_usuario')->references('id_usuario')->on('usuarios')->onDelete('cascade');
         });
     }
 

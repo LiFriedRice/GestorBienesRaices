@@ -13,10 +13,12 @@ return new class extends Migration
     {
         Schema::create('pagos', function (Blueprint $table) {
             $table->id('id_pago');
-            $table->foreignId('id_usuario')->constrained('usuarios')->onDelete('cascade');
+            $table->unsignedBigInteger('id_usuario');
             $table->decimal('monto', 15, 2);
             $table->enum('metodo_pago', ['tarjeta_credito', 'transferencia', 'paypal']);
             $table->timestamp('fecha_pago');
+
+            $table->foreign('id_usuario')->references('id_usuario')->on('usuarios')->onDelete('cascade');
         });
     }
 

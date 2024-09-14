@@ -13,10 +13,12 @@ return new class extends Migration
     {
         Schema::create('historial_propiedades', function (Blueprint $table) {
             $table->id('id_historial');
-            $table->foreignId('id_propiedad')->constrained('propiedades')->onDelete('cascade');
+            $table->unsignedBigInteger('id_propiedad');
             $table->enum('estado_anterior', ['disponible', 'en negociacion', 'vendida', 'alquilada']);
             $table->enum('estado_nuevo', ['disponible', 'en negociacion', 'vendida', 'alquilada']);
             $table->timestamp('fecha_cambio');
+
+            $table->foreign('id_propiedad')->references('id_propiedad')->on('propiedades')->onDelete('cascade');
         });
     }
 
@@ -25,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('historial__propiedades');
+        Schema::dropIfExists('historial_propiedades');
     }
 };

@@ -13,12 +13,15 @@ return new class extends Migration
     {
         Schema::create('transacciones', function (Blueprint $table) {
             $table->id('id_transaccion');
-            $table->foreignId('id_usuario')->constrained('usuarios')->onDelete('cascade');
-            $table->foreignId('id_propiedad')->constrained('propiedades')->onDelete('cascade');
+            $table->unsignedBigInteger('id_usuario');
+            $table->unsignedBigInteger('id_propiedad');
             $table->decimal('monto', 15, 2);
             $table->enum('tipo_transaccion', ['compra', 'alquiler']);
             $table->timestamp('fecha_transaccion');
             $table->enum('estado', ['completada', 'pendiente', 'cancelada']);
+
+            $table->foreign('id_usuario')->references('id_usuario')->on('usuarios')->onDelete('cascade');
+            $table->foreign('id_propiedad')->references('id_propiedad')->on('propiedades')->onDelete('cascade');
         });
     }
 
