@@ -16,11 +16,11 @@ return new class extends Migration
             $table->string('nombre', 50);
             $table->string('apellido', 50);
             $table->string('email', 100)->unique();
-            $table->string('telefono', 15);
+            $table->string('telefono', 20);
             $table->string('direccion', 255);
             $table->enum('tipo_usuario', ['admin', 'cliente', 'agente', 'propietario']);
             $table->boolean('verificado')->default(false);
-            $table->timestamp('fecha_registro');
+            $table->timestamps();
             $table->string('contraseña', 255);
             $table->datetime('ultimo_acceso')->nullable();
             $table->enum('estado_cuenta', ['activa', 'suspendida', 'eliminada'])->default('activa');

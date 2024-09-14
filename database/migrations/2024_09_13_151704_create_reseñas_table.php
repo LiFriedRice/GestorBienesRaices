@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_propiedad');
             $table->integer('calificacion')->default(5);
             $table->text('comentario')->nullable();
-            $table->timestamp('fecha_reseña');
+            $table->timestamps();
 
             $table->foreign('id_propiedad')->references('id_propiedad')->on('propiedades')->onDelete('cascade');
             $table->foreign('id_usuario')->references('id_usuario')->on('usuarios')->onDelete('cascade');

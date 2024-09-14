@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id('id_auditoria'); // ID de la auditoría
             $table->unsignedBigInteger('id_usuario');
             $table->string('accion', 255); // Acción realizada
-            $table->timestamp('fecha_accion'); // Fecha de la acción
             $table->text('detalles'); // Detalles adicionales sobre la acción
             $table->timestamps();
 

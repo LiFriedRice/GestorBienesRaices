@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_usuario_destinatario');
             $table->unsignedBigInteger('id_propiedad');
             $table->text('mensaje');
-            $table->timestamp('fecha_envio');
+            $table->timestamps();
 
             $table->foreign('id_usuario_remitente')->references('id_usuario')->on('usuarios')->onDelete('cascade');
             $table->foreign('id_usuario_destinatario')->references('id_usuario')->on('usuarios')->onDelete('cascade');

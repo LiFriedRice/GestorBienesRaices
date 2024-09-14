@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id('id_favorito');
             $table->unsignedBigInteger('id_usuario');
             $table->unsignedBigInteger('id_propiedad');
-            $table->timestamp('fecha_agregado');
+            $table->timestamps();
 
             $table->foreign('id_usuario')->references('id_usuario')->on('usuarios')->onDelete('cascade');
             $table->foreign('id_propiedad')->references('id_propiedad')->on('propiedades')->onDelete('cascade');

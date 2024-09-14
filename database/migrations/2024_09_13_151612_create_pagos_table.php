@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_usuario');
             $table->decimal('monto', 15, 2);
             $table->enum('metodo_pago', ['tarjeta_credito', 'transferencia', 'paypal']);
-            $table->timestamp('fecha_pago');
+            $table->timestamps();
 
             $table->foreign('id_usuario')->references('id_usuario')->on('usuarios')->onDelete('cascade');
         });

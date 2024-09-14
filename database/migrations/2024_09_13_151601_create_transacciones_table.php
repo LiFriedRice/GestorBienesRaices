@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_propiedad');
             $table->decimal('monto', 15, 2);
             $table->enum('tipo_transaccion', ['compra', 'alquiler']);
-            $table->timestamp('fecha_transaccion');
+            $table->timestamps();
             $table->enum('estado', ['completada', 'pendiente', 'cancelada']);
 
             $table->foreign('id_usuario')->references('id_usuario')->on('usuarios')->onDelete('cascade');

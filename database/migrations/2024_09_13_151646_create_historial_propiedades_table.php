@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_propiedad');
             $table->enum('estado_anterior', ['disponible', 'en negociacion', 'vendida', 'alquilada']);
             $table->enum('estado_nuevo', ['disponible', 'en negociacion', 'vendida', 'alquilada']);
-            $table->timestamp('fecha_cambio');
+            $table->timestamps();
 
             $table->foreign('id_propiedad')->references('id_propiedad')->on('propiedades')->onDelete('cascade');
         });

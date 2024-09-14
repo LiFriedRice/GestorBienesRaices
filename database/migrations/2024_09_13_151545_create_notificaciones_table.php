@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id('id_notificacion');
             $table->unsignedBigInteger('id_usuario');
             $table->string('mensaje', 255);
-            $table->timestamp('fecha_envio');
+            $table->timestamps();
             $table->boolean('leido')->default(false);
 
             $table->foreign('id_usuario')->references('id_usuario')->on('usuarios')->onDelete('cascade');
