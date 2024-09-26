@@ -27,7 +27,7 @@ return new class extends Migration
             $table->integer('baños')->default(0);
             $table->integer('parqueos')->default(0);
             $table->integer('pisos')->default(0);
-            $table->string('geolocalizacion'); // Change to string or text if point is not supported
+            $table->point('geolocalizacion'); // Change to string or text if point is not supported
             $table->string('tipo_suelo', 50);
             $table->string('servicios_comunitarios', 255);
             $table->decimal('gastos_comunes', 10, 2);

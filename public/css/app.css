@@ -52,6 +52,7 @@ body {
 
 	font-size: 14px;
 
+
 }
 
 a:hover {
@@ -71,7 +72,20 @@ a:hover {
 	position: relative;
 
 }
+.container{
+	background-color: red;
+	padding: 10px;
+}
+.containerfilter{
+	width: 80%;
+	padding-top: 40px;
+	margin: 0 auto;
+}
 
+.page-content-wrapper{
+	width: 83%;
+	margin: 0 auto;
+}
 .top-header {
 
 	width: 100%;
