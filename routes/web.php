@@ -18,3 +18,4 @@ Route::get('/', function () {
     return view('PaginaPrincipal');
 });
 Route::get('/', [PropiedadesController::class, 'MostrarProp']);
+Route::get('/propiedades', function () {return view('Propiedades.create');})->name('Publicacion');

@@ -74,7 +74,7 @@
 										</li>
 										<li class="nav-item dropdown">
 											<a class="nav-link dropdown-toggle" href="javascript:;" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class='bx bx-user mr-4'></i> Vendedores</a>
-											<div class="dropdown-menu"> <a class="dropdown-item" href="javascript:;">Usuario</a>
+											<div class="dropdown-menu"> <a class="dropdown-item" href="{{ route('Publicacion') }}">Usuario</a>
 												<a class="dropdown-item" href="javascript:;">Agente inmobiliario</a>
 											</div>
 										</li>

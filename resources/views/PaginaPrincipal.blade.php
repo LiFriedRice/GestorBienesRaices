@@ -48,7 +48,7 @@
 						<div class="card-body text-center">
 							<img src="https://via.placeholder.com/110x110" width="100%" height="200"
 								class=" p-1 border bg-white" alt="" />
-							<h5 class="mb-0 mt-4 text-white">Pauline I. Bird</h5>
+							<h5 class="mb-0 mt-4 text-white">{{ $Propiedad->titulo }}</h5>
 							<p class="mb-0 text-white">Webdeveloper</p>
 							<div class="list-inline contacts-social mt-3"> <a href="javascript:;"
 									class="list-inline-item text-facebook"><i class='bx bxl-facebook'></i></a>
