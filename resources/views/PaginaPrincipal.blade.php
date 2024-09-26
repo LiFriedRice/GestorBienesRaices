@@ -1,4 +1,4 @@
-@extends('Layouts.app');
+@extends('Layouts.app')
 @section('content')
 	<!--end navigation-->
 <img src="{{ asset('/images/Portada.jpg') }}" alt="" width="100%">
@@ -49,7 +49,7 @@
 							<img src="https://via.placeholder.com/110x110" width="100%" height="200"
 								class=" p-1 border bg-white" alt="" />
 							<h5 class="mb-0 mt-4 text-white">{{ $Propiedad->titulo }}</h5>
-							<p class="mb-0 text-white">Webdeveloper</p>
+							<p class="mb-0 text-white">{{ $Propiedad->descripcion }}</p>
 							<div class="list-inline contacts-social mt-3"> <a href="javascript:;"
 									class="list-inline-item text-facebook"><i class='bx bxl-facebook'></i></a>
 								<a href="javascript:;" class="list-inline-item text-twitter"><i

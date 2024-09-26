@@ -19,3 +19,5 @@ Route::get('/', function () {
 });
 Route::get('/', [PropiedadesController::class, 'MostrarProp']);
 Route::get('/propiedades', function () {return view('Propiedades.create');})->name('Publicacion');
+Route::get('/Registrarse', function () {return view('Usuarios.register');})->name('Registrarse');
+Route::get('/IniciarSesion', function () {return view('Usuarios.login');})->name('IniciarSesion');

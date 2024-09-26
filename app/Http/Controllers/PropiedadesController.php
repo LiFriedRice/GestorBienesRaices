@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 class PropiedadesController extends Controller
 {
     public function MostrarProp() {
-        $Propiedades = Propiedades::all();
+        $Propiedades = Propiedades::take(6)->get();
         return view('PaginaPrincipal', compact('Propiedades'));
     }
 }
