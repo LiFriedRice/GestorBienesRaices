@@ -46,7 +46,7 @@ class datosrandom extends Seeder
         // Seeder para la tabla Propiedades
         DB::table('propiedades')->insert([
             [
-                'id_usuario' => 1,
+                //'id_usuario' => 1,
                 'titulo' => 'Casa en el centro',
                 'descripcion' => 'Una hermosa casa en el centro de la ciudad.',
                 'tipo_propiedad' => 'residencial',
@@ -60,7 +60,7 @@ class datosrandom extends Seeder
                 'baños' => 2,
                 'parqueos' => 1,
                 'pisos' => 2,
-                'geolocalizacion' => DB::raw('POINT(40.7128, -74.0060)'),
+                //'geolocalizacion' => DB::raw('POINT(40.7128, -74.0060)'),
                 'tipo_suelo' => 'urbano',
                 'servicios_comunitarios' => 'piscina, gimnasio',
                 'gastos_comunes' => 150.00,
@@ -68,7 +68,7 @@ class datosrandom extends Seeder
                 'entrega' => 'inmediata',
             ],
             [
-                'id_usuario' => 2,
+                //'id_usuario' => 2,
                 'titulo' => 'Departamento moderno',
                 'descripcion' => 'Moderno departamento en el barrio de moda.',
                 'tipo_propiedad' => 'comercial',
@@ -82,7 +82,7 @@ class datosrandom extends Seeder
                 'baños' => 1,
                 'parqueos' => 1,
                 'pisos' => 1,
-                'geolocalizacion' => DB::raw('POINT(34.0522, -118.2437)'),
+                //'geolocalizacion' => DB::raw('POINT(34.0522, -118.2437)'),
                 'tipo_suelo' => 'urbano',
                 'servicios_comunitarios' => 'seguridad 24h, parque',
                 'gastos_comunes' => 200.00,

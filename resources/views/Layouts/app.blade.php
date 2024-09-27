@@ -88,7 +88,7 @@
 								Vendedores</a>
 							<div class="dropdown-menu"> <a class="dropdown-item"
 									href="{{ route('Publicacion') }}">Usuario</a>
-								<a class="dropdown-item" href="javascript:;">Agente inmobiliario</a>
+								<a class="dropdown-item" href="{{ route('Listado')}}">Agente inmobiliario</a>
 							</div>
 						</li>
 

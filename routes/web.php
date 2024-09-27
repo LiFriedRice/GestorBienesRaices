@@ -14,10 +14,25 @@ use App\Http\Controllers\PropiedadesController;
 |
 */
 
-Route::get('/', function () {
-    return view('PaginaPrincipal');
-});
-Route::get('/', [PropiedadesController::class, 'MostrarProp']);
-Route::get('/propiedades', function () {return view('Propiedades.create');})->name('Publicacion');
-Route::get('/Registrarse', function () {return view('Usuarios.register');})->name('Registrarse');
-Route::get('/IniciarSesion', function () {return view('Usuarios.login');})->name('IniciarSesion');
+// Ruta principal que muestra la página principal con las propiedades.
+Route::get('/', [PropiedadesController::class, 'MostrarProp'])->name('PaginaPrincipal');
+
+// Ruta para crear una nueva propiedad
+Route::get('/propiedades', function () {
+    return view('Propiedades.create');
+})->name('Publicacion');
+
+// Ruta para mostrar la lista de propiedades
+Route::get('/listado', [PropiedadesController::class, 'Listado'])->name('Listado');
+
+// Ruta para la página de registro de usuario
+Route::get('/registrarse', function () {
+    return view('Usuarios.register');
+})->name('Registrarse');
+
+// Ruta para la página de inicio de sesión
+Route::get('/iniciarsesion', function () {
+    return view('Usuarios.login');
+})->name('IniciarSesion');
+
+Route::post('/propiedades', [PropiedadesController::class, 'store'])->name('propiedades.store');

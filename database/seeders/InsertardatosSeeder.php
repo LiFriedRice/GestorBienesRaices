@@ -46,7 +46,7 @@ class InsertardatosSeeder extends Seeder
         // Datos para propiedades
         $propiedades = [
             [
-                'id_usuario' => 1,
+                //'id_usuario' => 1,
                 'titulo' => 'Apartamento en el centro',
                 'descripcion' => 'Hermoso apartamento con vista al mar.',
                 'tipo_propiedad' => 'residencial',
@@ -68,7 +68,7 @@ class InsertardatosSeeder extends Seeder
                 'entrega' => 'inmediata',
             ],
             [
-                'id_usuario' => 2,
+                //'id_usuario' => 2,
                 'titulo' => 'Local comercial en la avenida principal',
                 'descripcion' => 'Local ideal para negocios.',
                 'tipo_propiedad' => 'comercial',
@@ -82,7 +82,7 @@ class InsertardatosSeeder extends Seeder
                 'baños' => 1,
                 'parqueos' => 0,
                 'pisos' => 1,
-                'geolocalizacion' => 'POINT(30.1234 40.5678)',
+                //'geolocalizacion' => 'POINT(30.1234 40.5678)',
                 'tipo_suelo' => 'comercial',
                 'servicios_comunitarios' => 'agua, luz',
                 'gastos_comunes' => 50.00,

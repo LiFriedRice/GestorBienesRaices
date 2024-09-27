@@ -27,7 +27,7 @@ class PropiedadesFactory extends Factory
             'baños' => $this->faker->numberBetween(1, 10),
             'parqueos' => $this->faker->numberBetween(0, 10),
             'pisos' => $this->faker->numberBetween(1, 5),
-            'geolocalizacion' => $this->faker->latitude . ', ' . $this->faker->longitude,
+            //'geolocalizacion' => $this->faker->latitude . ', ' . $this->faker->longitude,
             'tipo_suelo' => $this->faker->word,
             'servicios_comunitarios' => $this->faker->sentence,
             'gastos_comunes' => $this->faker->randomFloat(2, 50, 500),
