@@ -93,12 +93,14 @@
 						</li>
 
 					</ul>
-					<form class="form-inline my-2 my-lg-0 nav-search">
+					<form class="form-inline my-2 my-lg-0 nav-search" action="{{ route('propiedades.buscar') }}"
+						method="GET">
 						<div class="input-group nav-width">
-							<input type="text" class="form-control" placeholder="Search"
+							<input type="text" name="query" class="form-control" placeholder="Buscar propiedades..."
 								aria-label="Recipient's username">
 							<div class="input-group-append border-left-0 ml-0">
-								<button class="btn border-left-0" type="submit"><i class='bx bx-search'></i>
+								<button class="btn border-left-0" type="submit">
+									<i class='bx bx-search'></i>
 								</button>
 							</div>
 						</div>
@@ -160,7 +162,7 @@
 										<a class="nav-link dropdown-toggle" href="javascript:;" role="button"
 											data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 											Iniciar Sesión
-											
+
 										</a>
 
 									@endif

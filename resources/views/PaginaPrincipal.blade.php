@@ -10,28 +10,30 @@
 		<div class="page-content">
 			<!--end row-->
 			<div class="row">
-				<div class="col-lg-3">
-					<div class="card radius-15 bg-warning">
-						<div class="card-body">
-							<div class="media align-items-center">
-								<img src="https://via.placeholder.com/110x110" width="80" height="80"
-									class="rounded-circle p-1 border bg-white" alt="" />
-								<div class="media-body ml-3">
-									<h5 class="mb-0">Pauline I. Bird</h5>
-									<p class="mb-0">Webdeveloper</p>
-									<div class="list-inline contacts-social mt-2"> <a href="javascript:;"
-											class="list-inline-item text-facebook"><i class='bx bxl-facebook'></i></a>
-										<a href="javascript:;" class="list-inline-item text-twitter"><i
-												class='bx bxl-twitter'></i></a>
-										<a href="javascript:;" class="list-inline-item"><i class='bx bxs-phone'></i></a>
-										<a href="javascript:;" class="list-inline-item text-skype"><i
-												class='bx bxl-skype'></i></a>
+				@foreach($Usuarios as $usuario)
+					<div class="col-lg-3">
+						<div class="card radius-15 bg-warning">
+							<div class="card-body">
+								<div class="media align-items-center">
+									<img src="https://via.placeholder.com/110x110" width="80" height="80"
+										class="rounded-circle p-1 border bg-white" alt="" />
+									<div class="media-body ml-3">
+										<h5 class="mb-0">{{ $usuario->name }}</h5>
+										<p class="mb-0">{{ $usuario->tipo_usuario }}</p>
+										<div class="list-inline contacts-social mt-2"> <a href="javascript:;"
+												class="list-inline-item text-facebook"><i class='bx bxl-facebook'></i></a>
+											<a href="javascript:;" class="list-inline-item text-twitter"><i
+													class='bx bxl-twitter'></i></a>
+											<a href="javascript:;" class="list-inline-item"><i class='bx bxs-phone'></i></a>
+											<a href="javascript:;" class="list-inline-item text-skype"><i
+													class='bx bxl-skype'></i></a>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>
+				@endforeach
 
 			</div>
 			<!--end row-->

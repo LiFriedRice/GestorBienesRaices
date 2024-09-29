@@ -17,6 +17,8 @@ use App\Http\Controllers\PropiedadesController;
 // Ruta principal que muestra la página principal con las propiedades.
 Route::get('/', [PropiedadesController::class, 'MostrarProp'])->name('PaginaPrincipal');
 
+Route::get('/Busqueda', [PropiedadesController::class, 'buscar'])->name('propiedades.buscar');
+
 // Ruta para crear una nueva propiedad
 Route::get('/propiedades', function () {
     return view('Propiedades.create');
