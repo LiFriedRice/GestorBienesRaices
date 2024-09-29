@@ -32,7 +32,6 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/PaginaPrincipal', function () {
-        return view('PaginaPrincipal');
-    })->name('PaginaPrincipal');
+    Route::get('/PaginaPrincipal', [PropiedadesController::class, 'MostrarProp'])->name('PaginaPrincipal');
 });
+

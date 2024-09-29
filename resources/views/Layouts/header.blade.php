@@ -146,22 +146,38 @@
 						</div>
 					</li>
 					<li class="nav-item dropdown dropdown-user-profile">
-						<a class=" dropdown-toggle dropdown-toggle-nocaret" href="javascript:;"
-							data-toggle="dropdown">
+						<a class=" dropdown-toggle dropdown-toggle-nocaret" href="javascript:;" data-toggle="dropdown">
 							<div class="media user-box align-items-center">
 								<div class="media-body user-info">
 
-									<a class="nav-link dropdown-toggle" href="javascript:;" role="button"
-										data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i
-											class='bx bx-user'></i>
-										Usuario</a>
-									<div class="dropdown-menu"> <a class="dropdown-item" href="{{ route('login') }}">Iniciar Sesion</a>
-										<a class="dropdown-item" href="{{ route('register') }}">Registrarse</a>
+									@if(Auth::check())
+										<a class="nav-link dropdown-toggle" href="javascript:;" role="button"
+											data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											<i class='bx bx-user'></i>
+											{{ Auth::user()->name }}
+										</a>
+									@else
+										<a class="nav-link dropdown-toggle" href="javascript:;" role="button"
+											data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											Iniciar Sesión
+											
+										</a>
+
+									@endif
+									<div class="dropdown-menu">
+										@if(Auth::check())
+											<form method="POST" action="{{ route('logout') }}" x-data>
+												@csrf
+												<button type="submit" class="dropdown-item">
+													{{ __('Log Out') }}
+												</button>
+											</form>
+										@else
+											<a class="dropdown-item" href="{{ route('login') }}">Iniciar Sesion</a>
+											<a class="dropdown-item" href="{{ route('register') }}">Registrarse</a>
+										@endif
 									</div>
-
-
 								</div>
-								<img src="https://via.placeholder.com/110x110" class="user-img" alt="user avatar">
 							</div>
 						</a>
 					</li>
