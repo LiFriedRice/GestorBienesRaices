@@ -1,4 +1,4 @@
-@extends('Layouts.app')
+@extends('Layouts.header')
 @section('content')
 <!--end navigation-->
 <img src="{{ asset('/images/Portada.jpg') }}" alt="" width="100%">

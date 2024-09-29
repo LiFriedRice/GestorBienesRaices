@@ -25,14 +25,5 @@ Route::get('/propiedades', function () {
 // Ruta para mostrar la lista de propiedades
 Route::get('/listado', [PropiedadesController::class, 'Listado'])->name('Listado');
 
-// Ruta para la página de registro de usuario
-Route::get('/registrarse', function () {
-    return view('Usuarios.register');
-})->name('Registrarse');
-
-// Ruta para la página de inicio de sesión
-Route::get('/iniciarsesion', function () {
-    return view('Usuarios.login');
-})->name('IniciarSesion');
 
 Route::post('/propiedades', [PropiedadesController::class, 'store'])->name('propiedades.store');

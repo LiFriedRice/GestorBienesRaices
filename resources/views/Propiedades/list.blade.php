@@ -1,4 +1,4 @@
-@extends('Layouts.app')
+@extends('Layouts.header')
 
 @section('content')
 <div class="Listadopro">
