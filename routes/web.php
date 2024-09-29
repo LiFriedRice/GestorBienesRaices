@@ -27,3 +27,12 @@ Route::get('/listado', [PropiedadesController::class, 'Listado'])->name('Listado
 
 
 Route::post('/propiedades', [PropiedadesController::class, 'store'])->name('propiedades.store');
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+])->group(function () {
+    Route::get('/PaginaPrincipal', function () {
+        return view('PaginaPrincipal');
+    })->name('PaginaPrincipal');
+});

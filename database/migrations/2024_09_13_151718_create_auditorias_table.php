@@ -18,7 +18,7 @@ return new class extends Migration
             $table->text('detalles'); // Detalles adicionales sobre la acción
             $table->timestamps();
 
-            $table->foreign('id_usuario')->references('id_usuario')->on('usuarios')->onDelete('cascade');
+            $table->foreign('id_usuario')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

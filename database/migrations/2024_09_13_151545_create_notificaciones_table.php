@@ -18,7 +18,7 @@ return new class extends Migration
             $table->timestamps();
             $table->boolean('leido')->default(false);
 
-            $table->foreign('id_usuario')->references('id_usuario')->on('usuarios')->onDelete('cascade');
+            $table->foreign('id_usuario')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

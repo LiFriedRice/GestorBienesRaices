@@ -18,7 +18,7 @@ return new class extends Migration
             $table->enum('metodo_pago', ['tarjeta_credito', 'transferencia', 'paypal']);
             $table->timestamps();
 
-            $table->foreign('id_usuario')->references('id_usuario')->on('usuarios')->onDelete('cascade');
+            $table->foreign('id_usuario')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

@@ -20,7 +20,7 @@ return new class extends Migration
             $table->timestamps();
             $table->enum('estado', ['completada', 'pendiente', 'cancelada']);
 
-            $table->foreign('id_usuario')->references('id_usuario')->on('usuarios')->onDelete('cascade');
+            $table->foreign('id_usuario')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('id_propiedad')->references('id_propiedad')->on('propiedades')->onDelete('cascade');
         });
     }

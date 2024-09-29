@@ -155,8 +155,8 @@
 										data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i
 											class='bx bx-user'></i>
 										Usuario</a>
-									<div class="dropdown-menu"> <a class="dropdown-item" href="{{ route('IniciarSesion') }}">Iniciar Sesion</a>
-										<a class="dropdown-item" href="{{ route('Registrarse') }}">Registrarse</a>
+									<div class="dropdown-menu"> <a class="dropdown-item" href="{{ route('login') }}">Iniciar Sesion</a>
+										<a class="dropdown-item" href="{{ route('register') }}">Registrarse</a>
 									</div>
 
 

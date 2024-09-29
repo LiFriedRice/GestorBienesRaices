@@ -15,32 +15,29 @@ class datosrandom extends Seeder
     public function run(): void
     {
          // Seeder para la tabla Usuarios
-         DB::table('usuarios')->insert([
+         DB::table('users')->insert([
             [
-                'nombre' => 'John',
+                'name' => 'John',
                 'apellido' => 'Doe',
                 'email' => 'jdns.doe@example.com',
                 'telefono' => '123456789',
                 'direccion' => '123 Main St',
                 'tipo_usuario' => 'cliente',
                 'verificado' => true,
-                'contraseña' => bcrypt('password123'),
-                'ultimo_acceso' => Carbon::now(),
+                'password' => bcrypt('password123'),
                 'estado_cuenta' => 'activa',
             ],
             [
-                'nombre' => 'Jane',
+                'name' => 'Jane',
                 'apellido' => 'Smith',
                 'email' => 'jhs.smith@example.com',
                 'telefono' => '987654321',
                 'direccion' => '456 Oak St',
                 'tipo_usuario' => 'agente',
                 'verificado' => false,
-
-                'contraseña' => bcrypt('password123'),
-                'ultimo_acceso' => Carbon::now(),
+                'password' => bcrypt('password123'),
                 'estado_cuenta' => 'activa',
-            ],
+            ]
         ]);
 
         // Seeder para la tabla Propiedades

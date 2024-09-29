@@ -21,7 +21,7 @@ return new class extends Migration
             $table->enum('status', ['activo', 'finalizado', 'cancelado'])->default('activo');
 
             $table->foreign('id_propiedad')->references('id_propiedad')->on('propiedades')->onDelete('cascade');
-            $table->foreign('id_usuario')->references('id_usuario')->on('usuarios')->onDelete('cascade');
+            $table->foreign('id_usuario')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

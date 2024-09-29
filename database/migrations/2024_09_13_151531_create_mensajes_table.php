@@ -19,8 +19,8 @@ return new class extends Migration
             $table->text('mensaje');
             $table->timestamps();
 
-            $table->foreign('id_usuario_remitente')->references('id_usuario')->on('usuarios')->onDelete('cascade');
-            $table->foreign('id_usuario_destinatario')->references('id_usuario')->on('usuarios')->onDelete('cascade');
+            $table->foreign('id_usuario_remitente')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('id_usuario_destinatario')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('id_propiedad')->references('id_propiedad')->on('propiedades')->onDelete('cascade');
         });
     }
