@@ -108,13 +108,13 @@ class datosrandom extends Seeder
         DB::table('foto_videos')->insert([
             [
                 'id_propiedad' => 1,
-                'url_media' => 'https://example.com/photo1.jpg',
+                'url_media' => 'https://cdn2.infocasas.com.uy/repo/img/cfd6c8b0a5aa2704d9cc5796ece93dc672152b70.jpeg',
                 'tipo_media' => 'foto',
             ],
             [
                 'id_propiedad' => 2,
-                'url_media' => 'https://example.com/video1.mp4',
-                'tipo_media' => 'video',
+                'url_media' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_FOmKdTmYd9pvWhOEydDG5GqQbVf9IicPxA&s',
+                'tipo_media' => 'foto',
             ],
         ]);
 

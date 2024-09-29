@@ -1,6 +1,6 @@
 @extends('Layouts.app')
 @section('content')
-	<!--end navigation-->
+<!--end navigation-->
 <img src="{{ asset('/images/Portada.jpg') }}" alt="" width="100%">
 <!--page-wrapper-->
 <div class="page-wrapper">
@@ -42,25 +42,30 @@
 		<div class="page-content">
 			<!--end row-->
 			<div class="row">
-			@foreach($Propiedades as $Propiedad)
-				<div class="col-lg-3">
-					<div class="card radius-15 bg-primary">
-						<div class="card-body text-center">
-							<img src="https://via.placeholder.com/110x110" width="100%" height="200"
-								class=" p-1 border bg-white" alt="" />
-							<h5 class="mb-0 mt-4 text-white">{{ $Propiedad->titulo }}</h5>
-							<p class="mb-0 text-white">{{ $Propiedad->descripcion }}</p>
-							<div class="list-inline contacts-social mt-3"> <a href="javascript:;"
-									class="list-inline-item text-facebook"><i class='bx bxl-facebook'></i></a>
-								<a href="javascript:;" class="list-inline-item text-twitter"><i
-										class='bx bxl-twitter'></i></a>
-								<a href="javascript:;" class="list-inline-item"><i class='bx bxs-phone'></i></a>
-								<a href="javascript:;" class="list-inline-item text-skype"><i
-										class='bx bxl-skype'></i></a>
+				@foreach($Propiedades as $Propiedad)
+					<div class="col-lg-3">
+						<div class="card radius-15 bg-primary">
+							<div class="card-body text-center">
+								@if($Propiedad->fotosVideos->isNotEmpty())
+									<img src="{{ asset($Propiedad->fotosVideos->first()->url_media) }}" width="100%"
+										height="200" class="p-1 border bg-white" alt="" />
+								@else
+									<img src="https://via.placeholder.com/110x110" width="100%" height="200"
+										class="p-1 border bg-white" alt="" />
+								@endif
+								<h5 class="mb-0 mt-4 text-white">{{ $Propiedad->titulo }}</h5>
+								<p class="mb-0 text-white">{{ $Propiedad->descripcion }}</p>
+								<div class="list-inline contacts-social mt-3"> <a href="javascript:;"
+										class="list-inline-item text-facebook"><i class='bx bxl-facebook'></i></a>
+									<a href="javascript:;" class="list-inline-item text-twitter"><i
+											class='bx bxl-twitter'></i></a>
+									<a href="javascript:;" class="list-inline-item"><i class='bx bxs-phone'></i></a>
+									<a href="javascript:;" class="list-inline-item text-skype"><i
+											class='bx bxl-skype'></i></a>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
 				@endforeach
 			</div>
 			<!--end row-->

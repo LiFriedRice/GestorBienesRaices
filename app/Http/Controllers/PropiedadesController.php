@@ -9,7 +9,9 @@ class PropiedadesController extends Controller
 {
     public function MostrarProp()
     {
-        $Propiedades = Propiedades::take(6)->get();
+        // Obtener todas las propiedades junto con sus fotos y videos
+        $Propiedades = Propiedades::with('fotosVideos')->get();
+
         return view('PaginaPrincipal', compact('Propiedades'));
     }
 

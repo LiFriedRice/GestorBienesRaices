@@ -7,6 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Propiedades extends Model
 {
+    public function fotosVideos()
+    {
+        return $this->hasMany(Foto_videos::class, 'id_propiedad', 'id_propiedad'); // Ajusta según el campo de relación
+    }
     use HasFactory;
 
     protected $table = 'propiedades';
@@ -33,4 +37,5 @@ class Propiedades extends Model
         'entrega',
         'fecha_publicacion',
     ];
+    
 }

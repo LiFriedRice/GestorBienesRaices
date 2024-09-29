@@ -7,5 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Foto_videos extends Model
 {
-    use HasFactory;
+
+    protected $table = 'foto_videos'; // Si es necesario especificar el nombre de la tabla
+
+    public function propiedad()
+    {
+        return $this->belongsTo(Propiedades::class, 'id_propiedad'); // Relación inversa
+    }
 }
