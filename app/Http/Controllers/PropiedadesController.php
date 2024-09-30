@@ -211,19 +211,19 @@ class PropiedadesController extends Controller
         $propiedad = Propiedades::create($data);
 
         Foto_videos::create([
-            'id_propiedad' => $propiedad->id, // Usa el ID de la propiedad recién creada
+            'id_propiedad' => $propiedad->id_propiedad, // Usa el ID de la propiedad recién creada
             'url_media' => $request->linkmedia, // Almacena el link de media
             'tipo_media' => 'foto'
         ]);
 
         Tipo_Terrenos::create([
-            'id_propiedad' => $propiedad->id, // Usa el ID de la propiedad recién creada
+            'id_propiedad' => $propiedad->id_propiedad, // Usa el ID de la propiedad recién creada
             'nombre_tipo_terreno' => $request->tipo_terreno, // Almacena el link de media
             'nombre_categoria' => $request->tipo_venta,
         ]);
 
         // Redirigir o retornar respuesta
-        return redirect()->route('Listado')->with('success', 'Propiedad guardada correctamente.');
+        return redirect()->route('Myusershow')->with('success', 'Propiedad guardada correctamente.');
     }
 
     // Actualizar la propiedad
