@@ -36,6 +36,8 @@ Route::get('/user/{id}', [PropiedadesController::class, 'Usershow'])->name('user
 //ruta de perfil de usuario autentificado
 Route::get('/user/', [PropiedadesController::class, 'Myusershow'])->name('Myusershow');
 
+
+
 Route::post('/propiedades', [PropiedadesController::class, 'CreateProp'])->name('propiedades.store');
 Route::middleware([
     'auth:sanctum',

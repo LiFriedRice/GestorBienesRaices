@@ -107,8 +107,13 @@ class PropiedadesController extends Controller
     {
         $userId = auth()->user()->id; // Obtén el ID del usuario autenticado
         $Usuarios = User::findOrFail($userId); // Busca al usuario por su ID
-        return view('User.Myuser', compact('Usuarios')); // Retorna la vista con los datos del usuario
+
+        // Obtén las propiedades publicadas por el usuario
+        $Propiedades = Propiedades::where('id_usuario', $userId)->get();
+
+        return view('User.Myuser', compact('Usuarios', 'Propiedades')); // Retorna la vista con los datos del usuario y propiedades
     }
+
     //mostrar perfil de propiedad
     public function Usershow($id)
     {
