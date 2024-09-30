@@ -14,11 +14,11 @@ class PropiedadesController extends Controller
 {
     public function MostrarProp()
     {
-        // Obtener todas las propiedades junto con sus fotos y videos
-        $Propiedades = Propiedades::with('fotosVideos')->get();
+        // Obtener hasta 12 propiedades junto con sus fotos y videos
+        $Propiedades = Propiedades::with('fotosVideos')->take(12)->get();
 
-        // Obtener todos los usuarios
-        $Usuarios = User::all();
+        // Obtener hasta 8 usuarios
+        $Usuarios = User::take(8)->get();
 
         // Retornar la vista con ambas colecciones
         return view('PaginaPrincipal', compact('Propiedades', 'Usuarios'));
@@ -103,6 +103,17 @@ class PropiedadesController extends Controller
 
         return view('Propiedades.propiedad', compact('Propiedad'));
     }
+
+    public function Propupdateshow($id)
+    {
+        // Obtiene la propiedad y sus fotos y reseñas
+        $propiedad = Propiedades::with(['fotosVideos'])
+            ->where('id_propiedad', $id) // Asegúrate de usar 'id_propiedad' aquí
+            ->firstOrFail();
+
+        // Retorna la vista con los datos de la propiedad
+        return view('Propiedades.update', compact('propiedad'));
+    }
     public function Myusershow()
     {
         $userId = auth()->user()->id; // Obtén el ID del usuario autenticado
@@ -117,9 +128,18 @@ class PropiedadesController extends Controller
     //mostrar perfil de propiedad
     public function Usershow($id)
     {
+        // Buscar al usuario por su ID
         $Usuarios = User::findOrFail($id);
-        return view('User.UserShow', compact('Usuarios'));
+
+        // Obtener las propiedades relacionadas con el usuario
+        $Propiedades = Propiedades::where('id_usuario', $Usuarios->id)->get(); // Usar $Usuarios->id
+
+        // Pasar los datos del usuario y las propiedades a la vista
+        return view('User.UserShow', compact('Usuarios', 'Propiedades'));
     }
+
+
+
     // añadir comentario
     public function almacenar(Request $request)
     {
@@ -205,5 +225,63 @@ class PropiedadesController extends Controller
         // Redirigir o retornar respuesta
         return redirect()->route('Listado')->with('success', 'Propiedad guardada correctamente.');
     }
+
+    // Actualizar la propiedad
+    public function Propupdate(Request $request, $id)
+{
+    // Validar la entrada del formulario
+    $request->validate([
+        'titulo' => 'required|string|max:255',
+        'descripcion' => 'required|string',
+        'tipo_propiedad' => 'required|string',
+        'area_construida' => 'required|numeric',
+        'area_terraza' => 'required|numeric',
+        'ubicacion' => 'required|string|max:255',
+        'precio' => 'required|numeric',
+        'estado' => 'required|string',
+        'año_construccion' => 'required|integer',
+        'dormitorios' => 'required|integer|min:0',
+        'baños' => 'required|integer|min:0',
+        'parqueos' => 'required|integer|min:0',
+        'pisos' => 'required|integer|min:0',
+        'tipo_suelo' => 'required|string',
+        'servicios_comunitarios' => 'required|string',
+        'gastos_comunes' => 'required|numeric',
+        'estado_inmueble' => 'required|string',
+        'entrega' => 'required|string',
+    ]);
+
+    // Encontrar la propiedad por su ID (usar id_propiedad)
+    $propiedad = Propiedades::where('id_propiedad', $id)->firstOrFail();
+
+    // Solo actualizar los campos que han cambiado
+    $propiedad->fill($request->only([
+        'titulo',
+        'descripcion',
+        'tipo_propiedad',
+        'area_construida',
+        'area_terraza',
+        'ubicacion',
+        'precio',
+        'estado',
+        'año_construccion',
+        'dormitorios',
+        'baños',
+        'parqueos',
+        'pisos',
+        'tipo_suelo',
+        'servicios_comunitarios',
+        'gastos_comunes',
+        'estado_inmueble',
+        'entrega'
+    ]));
+
+    // Guardar los cambios en la base de datos
+    $propiedad->save();
+
+    // Redirigir o mostrar un mensaje de éxito
+    return redirect()->route('Myusershow')->with('success', 'Propiedad actualizada correctamente.');
+}
+
 
 }

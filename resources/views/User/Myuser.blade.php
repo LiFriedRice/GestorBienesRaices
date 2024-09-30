@@ -1,16 +1,16 @@
 @extends('Layouts.header')
 @section('content')
 <div class="container mt-5">
-    <h1 class="text-center">Detalles del Usuario</h1>
-    <div class="card mb-4 shadow">
+
+    <div class="card mt-5 shadow">
         <div class="card-header bg-primary text-white">
             <h5 class="mb-0">{{ $Usuarios->name }} {{ $Usuarios->apellido }}</h5>
         </div>
         <div class="card-body">
             <div class="row">
                 <div class="col-md-4 text-center">
-                    <img src="{{ $Usuarios->profile_photo_path ? asset('storage/' . $Usuarios->profile_photo_path) : asset('images/default-profile.png') }}"
-                        alt="Foto de Perfil" class="img-fluid rounded-circle" style="width: 150px; height: 150px;">
+                    <img src="https://cdn-icons-png.flaticon.com/512/6522/6522581.png "
+                        alt="Foto de Perfil" class="img-fluid rounded-circle">
                 </div>
                 <div class="col-md-8">
                     <ul class="list-group">
@@ -58,8 +58,9 @@
                     <td>{{ $propiedad->precio }}</td>
                     <td>{{ $propiedad->estado }}</td>
                     <td>
-                        <a href="#" class="btn btn-info">Ver</a>
-                        <a href="#" class="btn btn-warning">Editar</a>
+                        <a href="{{ route('propiedadshow', $propiedad->id_propiedad) }}" class="btn btn-info">Ver</a>
+                        <a href="{{ route('propiedadesview.edit', $propiedad->id_propiedad) }}" class="btn btn-warning">Editar</a>
+
                         <a href="#" class="btn btn-danger">Eliminar</a>
                     </td>
                 </tr>

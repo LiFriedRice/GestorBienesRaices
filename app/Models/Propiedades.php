@@ -18,8 +18,10 @@ class Propiedades extends Model
     }
 
     protected $table = 'propiedades';
+    protected $primaryKey = 'id_propiedad';
 
     protected $fillable = [
+        'id_propiedad',
         'id_usuario',
         'titulo', 
         'descripcion', 

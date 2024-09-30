@@ -35,8 +35,10 @@ Route::get('/listado', [PropiedadesController::class, 'Listado'])->name('Listado
 Route::get('/user/{id}', [PropiedadesController::class, 'Usershow'])->name('usershow');
 //ruta de perfil de usuario autentificado
 Route::get('/user/', [PropiedadesController::class, 'Myusershow'])->name('Myusershow');
+// boton de view de editar
+Route::get('/Propiedad/{id}/editar', [PropiedadesController::class, 'Propupdateshow'])->name('propiedadesview.edit');
 
-
+Route::put('/propiedades/{id}', [PropiedadesController::class, 'Propupdate'])->name('propiedades.update');
 
 Route::post('/propiedades', [PropiedadesController::class, 'CreateProp'])->name('propiedades.store');
 Route::middleware([
