@@ -25,6 +25,7 @@
             </div>
         </div>
         <a href="" class="btn btn-secondary mt-3">Regresar</a>
+        <a href="{{ route('Publicacion') }}" class="btn btn-secondary mt-3 bg-primary">Publicar propiedad</a>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

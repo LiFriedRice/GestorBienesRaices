@@ -87,7 +87,7 @@
 								aria-haspopup="true" aria-expanded="false"> <i class='bx bx-user mr-4'></i>
 								Vendedores</a>
 							<div class="dropdown-menu"> <a class="dropdown-item"
-									href="{{ route('Publicacion') }}">Usuario</a>
+									href="">Usuario</a>
 								<a class="dropdown-item" href="{{ route('Listado')}}">Agente inmobiliario</a>
 							</div>
 						</li>
@@ -173,6 +173,7 @@
 												<button type="submit" class="dropdown-item">
 													{{ __('Log Out') }}
 												</button>
+												<a class="dropdown-item" href="{{ route('Myusershow') }}">My perfil</a>
 											</form>
 										@else
 											<a class="dropdown-item" href="{{ route('login') }}">Iniciar Sesion</a>

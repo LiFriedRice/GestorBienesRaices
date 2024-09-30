@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('propiedades', function (Blueprint $table) {
             $table->id('id_propiedad');
-            //$table->unsignedBigInteger('id_usuario'); // Define la columna de clave foránea
+            $table->unsignedBigInteger('id_usuario'); // Define la columna de clave foránea
             $table->string('titulo', 255);
             $table->text('descripcion');
             $table->enum('tipo_propiedad', ['comercial', 'residencial']);
@@ -36,7 +36,7 @@ return new class extends Migration
             $table->timestamps();
 
 
-            //$table->foreign('id_usuario')->references('id_usuario')->on('usuarios')->onDelete('cascade');
+            $table->foreign('id_usuario')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

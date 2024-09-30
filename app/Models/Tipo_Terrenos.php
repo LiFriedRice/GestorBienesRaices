@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Tipo_Terrenos extends Model
 {
     use HasFactory;
+    protected $table = 'tipo_terrenos';
+
+    protected $fillable = [
+        'id_propiedad',
+        'nombre_tipo_terreno', 
+        'nombre_categoria', 
+
+    ];
 }

@@ -43,7 +43,7 @@ class datosrandom extends Seeder
         // Seeder para la tabla Propiedades
         DB::table('propiedades')->insert([
             [
-                //'id_usuario' => 1,
+                'id_usuario' => 1,
                 'titulo' => 'Casa en el centro',
                 'descripcion' => 'Una hermosa casa en el centro de la ciudad.',
                 'tipo_propiedad' => 'residencial',
@@ -65,7 +65,7 @@ class datosrandom extends Seeder
                 'entrega' => 'inmediata',
             ],
             [
-                //'id_usuario' => 2,
+                'id_usuario' => 2,
                 'titulo' => 'Departamento moderno',
                 'descripcion' => 'Moderno departamento en el barrio de moda.',
                 'tipo_propiedad' => 'comercial',
@@ -89,7 +89,7 @@ class datosrandom extends Seeder
         ]);
         
         // Seeder para la tabla Tipos_Terrenos
-        DB::table('tipo__terrenos')->insert([
+        DB::table('tipo_terrenos')->insert([
             [
                 'id_propiedad' => 1,
                 'nombre_tipo_terreno' => 'casa',

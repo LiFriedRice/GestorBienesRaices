@@ -31,8 +31,10 @@ Route::get('/listado', [PropiedadesController::class, 'Listado'])->name('Listado
 
 //ruta para mostrar perfil de usuario
 Route::get('/user/{id}', [PropiedadesController::class, 'Usershow'])->name('usershow');
+//ruta de perfil de usuario autentificado
+Route::get('/user/', [PropiedadesController::class, 'Myusershow'])->name('Myusershow');
 
-Route::post('/propiedades', [PropiedadesController::class, 'store'])->name('propiedades.store');
+Route::post('/propiedades', [PropiedadesController::class, 'CreateProp'])->name('propiedades.store');
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_propiedad');
             $table->string('url_media', 255);
             $table->enum('tipo_media', ['foto', 'video']);
+            $table->timestamps();
 
             $table->foreign('id_propiedad')->references('id_propiedad')->on('propiedades')->onDelete('cascade');
         });

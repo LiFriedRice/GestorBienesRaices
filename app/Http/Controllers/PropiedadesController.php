@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Foto_videos;
 use App\Models\Propiedades;
+use App\Models\Tipo_Terrenos;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -102,15 +104,29 @@ class PropiedadesController extends Controller
         return view('User.UserShow', compact('Usuarios'));
     }
 
+    //mostrar perfil de usuario autentificado
+    public function Myusershow()
+    {
+        $userId = auth()->user()->id; // Obtén el ID del usuario autenticado
+        $Usuarios = User::findOrFail($userId); // Busca al usuario por su ID
+        return view('User.Myuser', compact('Usuarios')); // Retorna la vista con los datos del usuario
+    }
+
     public function Listado()
     {
         $Propiedades = Propiedades::all();
         return view('Propiedades.list', compact('Propiedades'));
     }
 
-    public function store(Request $request)
+    public function CreateProp(Request $request)
     {
+        // Asegúrate de que el usuario esté autenticado
 
+        // Captura todos los datos del request
+        $data = $request->all();
+        $data['id_usuario'] = auth()->id(); // Obtiene el ID del usuario autenticado
+
+        // Valida los datos
         $validatedData = $request->validate([
             'titulo' => 'required|max:255',
             'descripcion' => 'required',
@@ -130,10 +146,30 @@ class PropiedadesController extends Controller
             'gastos_comunes' => 'numeric',
             'estado_inmueble' => 'required',
             'entrega' => 'required',
-
+            'linkmedia' => 'required|url', // Asegúrate de validar el link de imagen
+            'tipo_terreno' => 'required|max:50', // Agregado
+            'tipo_venta' => 'required|max:50', // Agregado
         ]);
 
-        Propiedades::create($validatedData);
+        // Crear la propiedad
+        $data = $validatedData;
+        $data['id_usuario'] = auth()->id(); // Añade el id del usuario autenticado
+        $propiedad = Propiedades::create($data);
+
+        Foto_videos::create([
+            'id_propiedad' => $propiedad->id, // Usa el ID de la propiedad recién creada
+            'url_media' => $request->linkmedia, // Almacena el link de media
+            'tipo_media' => 'foto'
+        ]);
+
+        Tipo_Terrenos::create([
+            'id_propiedad' => $propiedad->id, // Usa el ID de la propiedad recién creada
+            'nombre_tipo_terreno' => $request->tipo_terreno, // Almacena el link de media
+            'nombre_categoria' => $request->tipo_venta,
+        ]);
+
+        // Redirigir o retornar respuesta
         return redirect()->route('Listado')->with('success', 'Propiedad guardada correctamente.');
     }
+
 }

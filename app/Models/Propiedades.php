@@ -16,6 +16,7 @@ class Propiedades extends Model
     protected $table = 'propiedades';
 
     protected $fillable = [
+        'id_usuario',
         'titulo', 
         'descripcion', 
         'tipo_propiedad', 
