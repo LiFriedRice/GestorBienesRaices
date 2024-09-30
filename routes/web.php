@@ -23,9 +23,11 @@ Route::get('/Busqueda', [PropiedadesController::class, 'buscar'])->name('propied
 Route::get('/propiedades', function () {
     return view('Propiedades.create');
 })->name('Publicacion');
-
+// Ruta para mostrar la propiedad
 Route::get('/propiedad/{id}', [PropiedadesController::class, 'Propshow'])->name('propiedadshow');
 
+// Ruta para almacenar el comentario
+Route::post('/comentarios', [PropiedadesController::class, 'almacenar'])->name('comentarios.store');
 // Ruta para mostrar la lista de propiedades
 Route::get('/listado', [PropiedadesController::class, 'Listado'])->name('Listado');
 

@@ -13,10 +13,11 @@
                         <div class="col-md-6">
                             <!-- Mostrar imagen principal de la propiedad -->
                             @if($Propiedad->fotosVideos->isNotEmpty())
-                                <img src="{{ asset($Propiedad->fotosVideos->first()->url_media) }}" 
-                                     class="img-fluid rounded mb-3" alt="Imagen de la propiedad">
+                                <img src="{{ asset($Propiedad->fotosVideos->first()->url_media) }}"
+                                    class="img-fluid rounded mb-3" alt="Imagen de la propiedad">
                             @else
-                                <img src="https://via.placeholder.com/500" class="img-fluid rounded mb-3" alt="Imagen no disponible">
+                                <img src="https://via.placeholder.com/500" class="img-fluid rounded mb-3"
+                                    alt="Imagen no disponible">
                             @endif
                         </div>
                         <div class="col-md-6">
@@ -71,6 +72,52 @@
                         <div class="col-md-6">
                             <p><strong>Entrega:</strong> {{ ucfirst($Propiedad->entrega) }}</p>
                         </div>
+                    </div>
+                    <h3>Comentarios</h3>
+                    <form action="{{ route('comentarios.store') }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="id_propiedad" value="{{ $Propiedad->id_propiedad }}">
+                        <div class="form-group">
+                            <label for="puntuacion">Puntuación</label>
+                            <select class="form-control" id="puntuacion" name="puntuacion" required>
+                                <option value="">Selecciona una puntuación</option>
+                                <option value="1">1 - Muy Malo</option>
+                                <option value="2">2 - Malo</option>
+                                <option value="3">3 - Regular</option>
+                                <option value="4">4 - Bueno</option>
+                                <option value="5">5 - Excelente</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="comentario">Comentario</label>
+                            <textarea class="form-control" id="comentario" name="comentario" rows="3"
+                                placeholder="Escribe tu comentario aquí" required></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Publicar Comentario</button>
+                    </form>
+                    <div class="container mt-5">
+                         <!-- Mostrar los comentarios -->
+                    <h4>Comentarios de otros usuarios</h4>
+                    @if($Propiedad->reseñas->isEmpty())
+                        <p>No hay comentarios para esta propiedad.</p>
+                    @else
+                        @foreach($Propiedad->reseñas as $reseña)
+                            <div class="container mt-3">
+                                <div class="card shadow" style="border-radius: 15px;">
+                                    <div class="card-body">
+                                        <h5 class="card-title text-primary">{{ $reseña->user->name }}</h5>
+                                        <h6 class="card-subtitle mb-2 text-muted">
+                                            Puntuación:
+                                            <span class="badge badge-success">{{ $reseña->calificacion }}</span>
+                                        </h6>
+                                        <p class="card-text">{{ $reseña->comentario }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    @endif
                     </div>
                 </div>
             </div>

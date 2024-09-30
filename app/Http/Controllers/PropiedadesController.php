@@ -6,7 +6,9 @@ use App\Models\Foto_videos;
 use App\Models\Propiedades;
 use App\Models\Tipo_Terrenos;
 use App\Models\User;
+use App\Models\Reseñas;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PropiedadesController extends Controller
 {
@@ -94,22 +96,49 @@ class PropiedadesController extends Controller
     }
     public function Propshow($id)
     {
-        // Usa 'id_propiedad' en lugar de 'id'
-        $Propiedad = Propiedades::with('fotosVideos')->where('id_propiedad', $id)->firstOrFail();
+        $Propiedad = Propiedades::with(['fotosVideos', 'reseñas.user'])->where('id_propiedad', $id)->firstOrFail();
+
+        // Verifica los datos de la propiedad
+
+
         return view('Propiedades.propiedad', compact('Propiedad'));
     }
-    public function Usershow($id)
-    {
-        $Usuarios = User::findOrFail($id);
-        return view('User.UserShow', compact('Usuarios'));
-    }
-
-    //mostrar perfil de usuario autentificado
     public function Myusershow()
     {
         $userId = auth()->user()->id; // Obtén el ID del usuario autenticado
         $Usuarios = User::findOrFail($userId); // Busca al usuario por su ID
         return view('User.Myuser', compact('Usuarios')); // Retorna la vista con los datos del usuario
+    }
+    //mostrar perfil de propiedad
+    public function Usershow($id)
+    {
+        $Usuarios = User::findOrFail($id);
+        return view('User.UserShow', compact('Usuarios'));
+    }
+    // añadir comentario
+    public function almacenar(Request $request)
+    {
+        // Validación del formulario
+        $request->validate([
+            'id_propiedad' => 'required|exists:propiedades,id_propiedad', // Verifica que el ID del producto exista
+            'puntuacion' => 'required|integer|between:1,5',
+            'comentario' => 'required|string|max:500',
+        ]);
+
+        // Obtén el ID del usuario autenticado
+        $userId = Auth::id();
+
+        // Guarda el comentario en la base de datos
+        Reseñas::create([
+            'id_usuario' => $userId,
+            'id_propiedad' => $request->id_propiedad,
+            'calificacion' => $request->puntuacion,
+            'comentario' => $request->comentario,
+        ]);
+
+        // Redirige a la función Propshow pasando el ID del producto
+        return redirect()->route('propiedadshow', ['id' => $request->id_propiedad])
+            ->with('success', 'Comentario publicado con éxito.');
     }
 
     public function Listado()

@@ -12,6 +12,10 @@ class Propiedades extends Model
         return $this->hasMany(Foto_videos::class, 'id_propiedad', 'id_propiedad'); // Ajusta según el campo de relación
     }
     use HasFactory;
+    public function reseñas()
+    {
+        return $this->hasMany(Reseñas::class, 'id_propiedad', 'id_propiedad');
+    }
 
     protected $table = 'propiedades';
 
