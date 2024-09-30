@@ -24,9 +24,13 @@ Route::get('/propiedades', function () {
     return view('Propiedades.create');
 })->name('Publicacion');
 
+Route::get('/propiedad/{id}', [PropiedadesController::class, 'Propshow'])->name('propiedadshow');
+
 // Ruta para mostrar la lista de propiedades
 Route::get('/listado', [PropiedadesController::class, 'Listado'])->name('Listado');
 
+//ruta para mostrar perfil de usuario
+Route::get('/user/{id}', [PropiedadesController::class, 'Usershow'])->name('usershow');
 
 Route::post('/propiedades', [PropiedadesController::class, 'store'])->name('propiedades.store');
 Route::middleware([

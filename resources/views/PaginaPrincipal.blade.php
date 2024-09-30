@@ -12,6 +12,7 @@
 			<div class="row">
 				@foreach($Usuarios as $usuario)
 					<div class="col-lg-3">
+					<a href="{{ route('usershow', $usuario->id) }}">
 						<div class="card radius-15 bg-warning">
 							<div class="card-body">
 								<div class="media align-items-center">
@@ -32,6 +33,7 @@
 								</div>
 							</div>
 						</div>
+					</a>
 					</div>
 				@endforeach
 
@@ -46,30 +48,39 @@
 			<div class="row">
 				@foreach($Propiedades as $Propiedad)
 					<div class="col-lg-3">
-						<div class="card radius-15 bg-primary">
-							<div class="card-body text-center">
-								@if($Propiedad->fotosVideos->isNotEmpty())
-									<img src="{{ asset($Propiedad->fotosVideos->first()->url_media) }}" width="100%"
-										height="200" class="p-1 border bg-white" alt="" />
-								@else
-									<img src="https://via.placeholder.com/110x110" width="100%" height="200"
-										class="p-1 border bg-white" alt="" />
-								@endif
-								<h5 class="mb-0 mt-4 text-white">{{ $Propiedad->titulo }}</h5>
-								<p class="mb-0 text-white">{{ $Propiedad->descripcion }}</p>
-								<div class="list-inline contacts-social mt-3"> <a href="javascript:;"
-										class="list-inline-item text-facebook"><i class='bx bxl-facebook'></i></a>
-									<a href="javascript:;" class="list-inline-item text-twitter"><i
-											class='bx bxl-twitter'></i></a>
-									<a href="javascript:;" class="list-inline-item"><i class='bx bxs-phone'></i></a>
-									<a href="javascript:;" class="list-inline-item text-skype"><i
-											class='bx bxl-skype'></i></a>
+						<a href="{{ route('propiedadshow', $Propiedad->id_propiedad) }}">
+							<div class="card radius-15 bg-primary">
+								<div class="card-body text-center">
+									@if($Propiedad->fotosVideos->isNotEmpty())
+										<img src="{{ asset($Propiedad->fotosVideos->first()->url_media) }}" width="100%"
+											height="200" class="p-1 border bg-white" alt="" />
+									@else
+										<img src="https://via.placeholder.com/110x110" width="100%" height="200"
+											class="p-1 border bg-white" alt="" />
+									@endif
+									<h5 class="mb-0 mt-4 text-white">{{ $Propiedad->titulo }}</h5>
+									<p class="mb-0 text-white">{{ $Propiedad->descripcion }}</p>
+									<div class="list-inline contacts-social mt-3">
+										<a href="javascript:;" class="list-inline-item text-facebook">
+											<i class='bx bxl-facebook'></i>
+										</a>
+										<a href="javascript:;" class="list-inline-item text-twitter">
+											<i class='bx bxl-twitter'></i>
+										</a>
+										<a href="javascript:;" class="list-inline-item">
+											<i class='bx bxs-phone'></i>
+										</a>
+										<a href="javascript:;" class="list-inline-item text-skype">
+											<i class='bx bxl-skype'></i>
+										</a>
+									</div>
 								</div>
 							</div>
-						</div>
+						</a>
 					</div>
 				@endforeach
 			</div>
+
 			<!--end row-->
 		</div>
 	</div>
