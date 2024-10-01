@@ -63,6 +63,7 @@ class datosrandom extends Seeder
                 'gastos_comunes' => 150.00,
                 'estado_inmueble' => 'usado',
                 'entrega' => 'inmediata',
+                'status' => '1'
             ],
             [
                 'id_usuario' => 2,
@@ -85,6 +86,7 @@ class datosrandom extends Seeder
                 'gastos_comunes' => 200.00,
                 'estado_inmueble' => 'a estrenar',
                 'entrega' => 'otra_fecha',
+                'status' => '1'
             ],
         ]);
         

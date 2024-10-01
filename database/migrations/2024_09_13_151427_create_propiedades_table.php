@@ -33,8 +33,8 @@ return new class extends Migration
             $table->decimal('gastos_comunes', 10, 2);
             $table->enum('estado_inmueble', ['a estrenar', 'usado']);
             $table->enum('entrega', ['inmediata', 'otra_fecha']);
+            $table->integer('status');
             $table->timestamps();
-
 
             $table->foreign('id_usuario')->references('id')->on('users')->onDelete('cascade');
         });

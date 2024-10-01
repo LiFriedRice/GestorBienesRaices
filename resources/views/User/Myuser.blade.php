@@ -9,8 +9,8 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-md-4 text-center">
-                    <img src="https://cdn-icons-png.flaticon.com/512/6522/6522581.png "
-                        alt="Foto de Perfil" class="img-fluid rounded-circle">
+                    <img src="https://cdn-icons-png.flaticon.com/512/6522/6522581.png " alt="Foto de Perfil"
+                        class="img-fluid rounded-circle">
                 </div>
                 <div class="col-md-8">
                     <ul class="list-group">
@@ -59,9 +59,39 @@
                     <td>{{ $propiedad->estado }}</td>
                     <td>
                         <a href="{{ route('propiedadshow', $propiedad->id_propiedad) }}" class="btn btn-info">Ver</a>
-                        <a href="{{ route('propiedadesview.edit', $propiedad->id_propiedad) }}" class="btn btn-warning">Editar</a>
+                        <a href="{{ route('propiedadesview.edit', $propiedad->id_propiedad) }}"
+                            class="btn btn-warning">Editar</a>
 
-                        <a href="#" class="btn btn-danger">Eliminar</a>
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmDeleteModal">
+                            Eliminar
+                        </button>
+                        <!-- Modal de confirmación -->
+                        <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog"
+                            aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="confirmDeleteModalLabel">Confirmar Eliminación</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        ¿Estás seguro de que deseas eliminar esta propiedad?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Cancelar</button>
+                                        <form action="{{ route('propiedades.updateprop', $propiedad->id_propiedad) }}"
+                                            method="POST" style="display:inline;">
+                                            @csrf
+                                            @method('PUT')
+                                            <button type="submit" class="btn btn-danger">Eliminar</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </td>
                 </tr>
             @endforeach

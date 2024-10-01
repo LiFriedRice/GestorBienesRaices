@@ -39,6 +39,8 @@ Route::get('/user/', [PropiedadesController::class, 'Myusershow'])->name('Myuser
 Route::get('/Propiedad/{id}/editar', [PropiedadesController::class, 'Propupdateshow'])->name('propiedadesview.edit');
 
 Route::put('/propiedades/{id}', [PropiedadesController::class, 'Propupdate'])->name('propiedades.update');
+// eliminacion logica
+Route::put('/propiedades/{id}', [PropiedadesController::class, 'Propdelete'])->name('propiedades.updateprop');
 
 Route::post('/propiedades', [PropiedadesController::class, 'CreateProp'])->name('propiedades.store');
 Route::middleware([

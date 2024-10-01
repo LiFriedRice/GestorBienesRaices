@@ -14,8 +14,8 @@ class PropiedadesController extends Controller
 {
     public function MostrarProp()
     {
-        // Obtener hasta 12 propiedades junto con sus fotos y videos
-        $Propiedades = Propiedades::with('fotosVideos')->take(12)->get();
+        // Obtener hasta 12 propiedades con status 1 junto con sus fotos y videos
+        $Propiedades = Propiedades::with('fotosVideos')->where('status', 1)->take(12)->get();
 
         // Obtener hasta 8 usuarios
         $Usuarios = User::take(8)->get();
@@ -23,77 +23,14 @@ class PropiedadesController extends Controller
         // Retornar la vista con ambas colecciones
         return view('PaginaPrincipal', compact('Propiedades', 'Usuarios'));
     }
-    public function buscar(Request $request)
-    {
-        // Captura los datos del formulario
-        $query = $request->input('query');
-        $tipo_propiedad = $request->input('tipo_propiedad');
-        $localizacion = $request->input('localizacion');
-        $pisos = $request->input('pisos');
-        $precioMin = $request->input('precioMin');
-        $precioMax = $request->input('precioMax');
-        $baños = $request->input('baños');
-        $dormitorios = $request->input('dormitorios');
-        $servicio_comunitario = $request->input('servicio_comunitario');
-        $areaMin = $request->input('areaMin');
-        $areaMax = $request->input('areaMax');
-        $tipo_adquisicion = $request->input('tipo_adquisicion');
-        $parqueo = $request->input('parqueo');
-        $estado_inmueble = $request->input('estado_inmueble');
-        $año_construccion = $request->input('año_construccion');
 
-        // Realizar la búsqueda en la tabla propiedades
-        $propiedades = Propiedades::with('fotosVideos')
-            ->when($query, function ($queryBuilder) use ($query) {
-                return $queryBuilder->where('titulo', 'like', "%$query%")
-                    ->orWhere('descripcion', 'like', "%$query%");
-            })
-            ->when($tipo_propiedad, function ($queryBuilder) use ($tipo_propiedad) {
-                return $queryBuilder->where('tipo_propiedad', $tipo_propiedad);
-            })
-            ->when($localizacion, function ($queryBuilder) use ($localizacion) {
-                return $queryBuilder->where('localizacion', $localizacion);
-            })
-            ->when($pisos, function ($queryBuilder) use ($pisos) {
-                return $queryBuilder->where('pisos', $pisos);
-            })
-            ->when($precioMin, function ($queryBuilder) use ($precioMin) {
-                return $queryBuilder->where('precio', '>=', $precioMin);
-            })
-            ->when($precioMax, function ($queryBuilder) use ($precioMax) {
-                return $queryBuilder->where('precio', '<=', $precioMax);
-            })
-            ->when($baños, function ($queryBuilder) use ($baños) {
-                return $queryBuilder->where('baños', $baños);
-            })
-            ->when($dormitorios, function ($queryBuilder) use ($dormitorios) {
-                return $queryBuilder->where('dormitorios', $dormitorios);
-            })
-            ->when($servicio_comunitario, function ($queryBuilder) use ($servicio_comunitario) {
-                return $queryBuilder->where('servicio_comunitario', 'like', "%$servicio_comunitario%");
-            })
-            ->when($areaMin, function ($queryBuilder) use ($areaMin) {
-                return $queryBuilder->where('area_contruida', '>=', $areaMin);
-            })
-            ->when($areaMax, function ($queryBuilder) use ($areaMax) {
-                return $queryBuilder->where('area_contruida', '<=', $areaMax);
-            })
-            ->when($tipo_adquisicion, function ($queryBuilder) use ($tipo_adquisicion) {
-                return $queryBuilder->where('tipo_adquisicion', $tipo_adquisicion);
-            })
-            ->when($parqueo, function ($queryBuilder) use ($parqueo) {
-                return $queryBuilder->where('parqueo', $parqueo);
-            })
-            ->when($estado_inmueble, function ($queryBuilder) use ($estado_inmueble) {
-                return $queryBuilder->where('estado_inmueble', $estado_inmueble);
-            })
-            ->when($año_construccion, function ($queryBuilder) use ($año_construccion) {
-                return $queryBuilder->where('año_construccion', $año_construccion);
-            })
-            ->get();
+    public function buscar()
+{
+    // Realizar la búsqueda en la tabla propiedades
+    $propiedades = Propiedades::with('fotosVideos')->where('status', 1)->get();
 
-        return view('Busqueda', compact('propiedades'));
-    }
+    return view('Busqueda', compact('propiedades'));
+}
     public function Propshow($id)
     {
         $Propiedad = Propiedades::with(['fotosVideos', 'reseñas.user'])->where('id_propiedad', $id)->firstOrFail();
@@ -120,7 +57,7 @@ class PropiedadesController extends Controller
         $Usuarios = User::findOrFail($userId); // Busca al usuario por su ID
 
         // Obtén las propiedades publicadas por el usuario
-        $Propiedades = Propiedades::where('id_usuario', $userId)->get();
+        $Propiedades = Propiedades::where('id_usuario', $userId)->where('status', 1)->get();
 
         return view('User.Myuser', compact('Usuarios', 'Propiedades')); // Retorna la vista con los datos del usuario y propiedades
     }
@@ -132,7 +69,7 @@ class PropiedadesController extends Controller
         $Usuarios = User::findOrFail($id);
 
         // Obtener las propiedades relacionadas con el usuario
-        $Propiedades = Propiedades::where('id_usuario', $Usuarios->id)->get(); // Usar $Usuarios->id
+        $Propiedades = Propiedades::where('id_usuario', $Usuarios->id)->where('status', 1)->get(); // Usar $Usuarios->id
 
         // Pasar los datos del usuario y las propiedades a la vista
         return view('User.UserShow', compact('Usuarios', 'Propiedades'));
@@ -228,60 +165,72 @@ class PropiedadesController extends Controller
 
     // Actualizar la propiedad
     public function Propupdate(Request $request, $id)
-{
-    // Validar la entrada del formulario
-    $request->validate([
-        'titulo' => 'required|string|max:255',
-        'descripcion' => 'required|string',
-        'tipo_propiedad' => 'required|string',
-        'area_construida' => 'required|numeric',
-        'area_terraza' => 'required|numeric',
-        'ubicacion' => 'required|string|max:255',
-        'precio' => 'required|numeric',
-        'estado' => 'required|string',
-        'año_construccion' => 'required|integer',
-        'dormitorios' => 'required|integer|min:0',
-        'baños' => 'required|integer|min:0',
-        'parqueos' => 'required|integer|min:0',
-        'pisos' => 'required|integer|min:0',
-        'tipo_suelo' => 'required|string',
-        'servicios_comunitarios' => 'required|string',
-        'gastos_comunes' => 'required|numeric',
-        'estado_inmueble' => 'required|string',
-        'entrega' => 'required|string',
-    ]);
+    {
+        // Validar la entrada del formulario
+        $request->validate([
+            'titulo' => 'required|string|max:255',
+            'descripcion' => 'required|string',
+            'tipo_propiedad' => 'required|string',
+            'area_construida' => 'required|numeric',
+            'area_terraza' => 'required|numeric',
+            'ubicacion' => 'required|string|max:255',
+            'precio' => 'required|numeric',
+            'estado' => 'required|string',
+            'año_construccion' => 'required|integer',
+            'dormitorios' => 'required|integer|min:0',
+            'baños' => 'required|integer|min:0',
+            'parqueos' => 'required|integer|min:0',
+            'pisos' => 'required|integer|min:0',
+            'tipo_suelo' => 'required|string',
+            'servicios_comunitarios' => 'required|string',
+            'gastos_comunes' => 'required|numeric',
+            'estado_inmueble' => 'required|string',
+            'entrega' => 'required|string',
+        ]);
 
-    // Encontrar la propiedad por su ID (usar id_propiedad)
-    $propiedad = Propiedades::where('id_propiedad', $id)->firstOrFail();
+        // Encontrar la propiedad por su ID (usar id_propiedad)
+        $propiedad = Propiedades::where('id_propiedad', $id)->firstOrFail();
 
-    // Solo actualizar los campos que han cambiado
-    $propiedad->fill($request->only([
-        'titulo',
-        'descripcion',
-        'tipo_propiedad',
-        'area_construida',
-        'area_terraza',
-        'ubicacion',
-        'precio',
-        'estado',
-        'año_construccion',
-        'dormitorios',
-        'baños',
-        'parqueos',
-        'pisos',
-        'tipo_suelo',
-        'servicios_comunitarios',
-        'gastos_comunes',
-        'estado_inmueble',
-        'entrega'
-    ]));
+        // Solo actualizar los campos que han cambiado
+        $propiedad->fill($request->only([
+            'titulo',
+            'descripcion',
+            'tipo_propiedad',
+            'area_construida',
+            'area_terraza',
+            'ubicacion',
+            'precio',
+            'estado',
+            'año_construccion',
+            'dormitorios',
+            'baños',
+            'parqueos',
+            'pisos',
+            'tipo_suelo',
+            'servicios_comunitarios',
+            'gastos_comunes',
+            'estado_inmueble',
+            'entrega'
+        ]));
 
-    // Guardar los cambios en la base de datos
-    $propiedad->save();
+        // Guardar los cambios en la base de datos
+        $propiedad->save();
 
-    // Redirigir o mostrar un mensaje de éxito
-    return redirect()->route('Myusershow')->with('success', 'Propiedad actualizada correctamente.');
-}
+        // Redirigir o mostrar un mensaje de éxito
+        return redirect()->route('Myusershow')->with('success', 'Propiedad actualizada correctamente.');
+    }
+    // funcion de eliminacion logica
+    public function Propdelete($id)
+    {
+        $updated = Propiedades::where('id_propiedad', $id)->update(['status' => 0]);
+
+        if ($updated) {
+            return redirect()->back()->with('success', 'Propiedad eliminada correctamente.');
+        }
+
+        return redirect()->back()->with('error', 'Propiedad no encontrada.');
+    }
+
 
 
 }
