@@ -20,7 +20,7 @@ Route::get('/', [PropiedadesController::class, 'MostrarProp'])->name('PaginaPrin
 Route::get('/Busqueda', [PropiedadesController::class, 'buscar'])->name('propiedades.buscar');
 
 // Ruta para crear una nueva propiedad
-Route::get('/Publicar', function () {return view('Propiedad.create');})->name('Publicacion');
+Route::get('/Publicar', function () {return view('Propiedades.create');})->name('Publicacion');
 //ruta de regreso 
 Route::get('/inicio', function () {return view('PaginaPrincipal');})->name('Regresarinicio');
 // Ruta para mostrar la propiedad
