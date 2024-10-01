@@ -1,5 +1,35 @@
-@extends('Layouts.header')
-@section('content')
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap" rel="stylesheet">
+	<!-- Required meta tags -->
+	<meta charset="utf-8" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<title>Bienes Raice</title>
+	<!-- Favicon -->
+	<link rel="icon" href="{{ asset('/images/favicon.png')}}" type="image/png" />
+	<!-- Plugins -->
+	<link href="{{ asset('/plugins/simplebar/css/simplebar.css') }}" rel="stylesheet" />
+	<link href="{{ asset('/plugins/perfect-scrollbar/css/perfect-scrollbar.css') }}" rel="stylesheet" />
+	<link href="{{ asset('/plugins/metismenu/css/metisMenu.min.css') }}" rel="stylesheet" />
+	<!-- Loader -->
+	<link href="{{ asset('/css/pace.min.css') }}" rel="stylesheet" />
+	<script src="{{ asset('/js/pace.min.js') }}"></script>
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="{{ asset('/css/bootstrap.min.css') }}" />
+	<!-- Icons CSS -->
+	<link rel="stylesheet" href="{{ asset('/css/icons.css') }}" />
+	<!-- App CSS -->
+	<link rel="stylesheet" href="{{ asset('/css/app.css') }}" />
+	<link rel="stylesheet" href="{{ asset('/css/dark-header.css') }}" />
+	<link rel="stylesheet" href="{{ asset('/css/dark-theme.css') }}" />
+</head>
+<body>
+    
 <div class="formulario">
     <div class="row justify-content-center">
         <!-- Formulario a la izquierda -->
@@ -131,12 +161,11 @@
                         </div>
 
                         <button type="submit" class="btn btn-primary btn-block">Guardar Propiedad</button>
+                        <a href="{{ route('PaginaPrincipal') }}" class="btn btn-secondary mt-3">Regresar</a>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-
-@endsection
+</body>
