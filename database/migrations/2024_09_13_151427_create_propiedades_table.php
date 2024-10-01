@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('ubicacion', 255);
             $table->decimal('precio', 15, 2);
             $table->enum('estado', ['disponible', 'en negociacion', 'vendida', 'alquilada']);
-            $table->year('año_construccion');
+            $table->integer('año_construccion')->default(0);
             $table->integer('dormitorios')->default(0);
             $table->integer('baños')->default(0);
             $table->integer('parqueos')->default(0);
