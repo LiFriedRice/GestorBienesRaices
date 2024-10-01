@@ -40,7 +40,7 @@ Route::get('/Propiedad/{id}/editar', [PropiedadesController::class, 'Propupdates
 
 Route::put('/propiedades/{id}', [PropiedadesController::class, 'Propupdate'])->name('propiedades.update');
 // eliminacion logica
-Route::put('/propiedades/{id}', [PropiedadesController::class, 'Propdelete'])->name('propiedades.updateprop');
+Route::put('/propiedades/{id}/eliminar', [PropiedadesController::class, 'Propdelete'])->name('propiedades.updateprop');
 
 Route::post('/propiedades', [PropiedadesController::class, 'CreateProp'])->name('propiedades.store');
 Route::middleware([

@@ -5,6 +5,7 @@
     <h2>Actualizar Propiedad</h2>
 
     <form action="{{ route('propiedades.update', $propiedad->id_propiedad) }}" method="POST">
+
         @csrf
         @method('PUT')
 
@@ -126,6 +127,6 @@
         </div>
 
         <button type="submit" class="btn btn-primary">Actualizar Propiedad</button>
-    </ffor>
+    </form>
 </div>
 @endsection
