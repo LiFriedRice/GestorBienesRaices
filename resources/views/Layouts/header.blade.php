@@ -37,7 +37,9 @@
 					<img src="{{ asset('/images/logo-icon.png')}}" class="logo-icon-2" alt="" />
 				</div>
 				<div>
-					<h4 class="d-none d-lg-flex logo-text">Inmobiliaria</h4>
+					<a href="{{ route('PaginaPrincipal') }}">
+						<h4 class="d-none d-lg-flex logo-text">Inmobiliaria</h4>
+					</a>
 				</div>
 
 			</div>
@@ -86,8 +88,7 @@
 							<a class="nav-link dropdown-toggle" href="javascript:;" role="button" data-toggle="dropdown"
 								aria-haspopup="true" aria-expanded="false"> <i class='bx bx-user mr-4'></i>
 								Vendedores</a>
-							<div class="dropdown-menu"> <a class="dropdown-item"
-									href="">Usuario</a>
+							<div class="dropdown-menu"> <a class="dropdown-item" href="">Usuario</a>
 								<a class="dropdown-item" href="{{ route('Listado')}}">Agente inmobiliario</a>
 							</div>
 						</li>

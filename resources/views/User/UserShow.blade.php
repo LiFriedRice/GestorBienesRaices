@@ -27,7 +27,7 @@
             </div>
         </div>
     </div>
-    <a href="" class="btn btn-secondary mt-3">Regresar</a>
+    <a href="{{ route('PaginaPrincipal') }}" class="btn btn-secondary mt-3">Regresar</a>
 </div>
 <div class="Listadopro">
     <h1>Lista de Propiedades</h1>

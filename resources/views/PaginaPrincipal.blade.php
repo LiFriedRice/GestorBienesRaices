@@ -49,8 +49,8 @@
 				@foreach($Propiedades as $Propiedad)
 					<div class="col-lg-3">
 						<a href="{{ route('propiedadshow', $Propiedad->id_propiedad) }}">
-							<div class="card radius-15 bg-primary">
-								<div class="card-body text-center">
+							<div class="card radius-15 bg-primary " style="width: 340px;">
+								<div class="card-body text-center ">
 									@if($Propiedad->fotosVideos->isNotEmpty())
 										<img src="{{ asset($Propiedad->fotosVideos->first()->url_media) }}" width="100%"
 											height="200" class="p-1 border bg-white" alt="" />
