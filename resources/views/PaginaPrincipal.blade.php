@@ -16,7 +16,7 @@
 						<div class="card radius-15 bg-warning">
 							<div class="card-body">
 								<div class="media align-items-center">
-									<img src="https://via.placeholder.com/110x110" width="80" height="80"
+									<img src="https://cdn-icons-png.flaticon.com/512/64/64572.png" width="80" height="80"
 										class="rounded-circle p-1 border bg-white" alt="" />
 									<div class="media-body ml-3">
 										<h5 class="mb-0">{{ $usuario->name }}</h5>
