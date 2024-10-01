@@ -43,6 +43,7 @@ class Propiedades extends Model
         'estado_inmueble',
         'entrega',
         'fecha_publicacion',
+        'status',
     ];
     
 }

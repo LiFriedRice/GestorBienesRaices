@@ -145,7 +145,10 @@ class PropiedadesController extends Controller
         // Crear la propiedad
         $data = $validatedData;
         $data['id_usuario'] = auth()->id(); // Añade el id del usuario autenticado
+        $data['status'] = 1;
+        
         $propiedad = Propiedades::create($data);
+
 
         Foto_videos::create([
             'id_propiedad' => $propiedad->id_propiedad, // Usa el ID de la propiedad recién creada
