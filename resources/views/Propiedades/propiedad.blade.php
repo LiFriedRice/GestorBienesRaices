@@ -1,4 +1,5 @@
 @extends('Layouts.header')
+
 @section('content')
 
 <div class="container my-5">
@@ -66,6 +67,12 @@
                         </div>
                         <div class="col-md-6">
                             <p><strong>Estado del Inmueble:</strong> {{ ucfirst($Propiedad->estado_inmueble) }}</p>
+
+                            <!-- Botón para abrir el modal de contacto -->
+                            <a href="{{ route('mensaje.create', ['id' => $Propiedad->id_propiedad]) }}"
+                                class="btn btn-primary mt-3 mb-3">
+                                Contactar con el comprador
+                            </a>
                         </div>
                     </div>
                     <div class="row">
@@ -73,6 +80,8 @@
                             <p><strong>Entrega:</strong> {{ ucfirst($Propiedad->entrega) }}</p>
                         </div>
                     </div>
+
+                    <!-- Sección de comentarios -->
                     <h3>Comentarios</h3>
                     <form action="{{ route('comentarios.store') }}" method="POST">
                         @csrf
@@ -97,30 +106,35 @@
 
                         <button type="submit" class="btn btn-primary">Publicar Comentario</button>
                     </form>
+
                     <div class="container mt-5">
-                         <!-- Mostrar los comentarios -->
-                    <h4>Comentarios de otros usuarios</h4>
-                    @if($Propiedad->reseñas->isEmpty())
-                        <p>No hay comentarios para esta propiedad.</p>
-                    @else
-                        @foreach($Propiedad->reseñas as $reseña)
-                            <div class="container mt-3">
-                                <div class="card shadow" style="border-radius: 15px;">
-                                    <div class="card-body">
-                                        <h5 class="card-title text-primary">{{ $reseña->user->name }}</h5>
-                                        <h6 class="card-subtitle mb-2 text-muted">
-                                            Puntuación:
-                                            <span class="badge badge-success">{{ $reseña->calificacion }}</span>
-                                        </h6>
-                                        <p class="card-text">{{ $reseña->comentario }}</p>
+                        <!-- Mostrar los comentarios -->
+                        <h4>Comentarios de otros usuarios</h4>
+                        @if($Propiedad->reseñas->isEmpty())
+                            <p>No hay comentarios para esta propiedad.</p>
+                        @else
+                            @foreach($Propiedad->reseñas as $reseña)
+                                <div class="container mt-3">
+                                    <div class="card shadow" style="border-radius: 15px;">
+                                        <div class="card-body">
+                                            <h5 class="card-title text-primary">{{ $reseña->user->name }}</h5>
+                                            <h6 class="card-subtitle mb-2 text-muted">
+                                                Puntuación:
+                                                <span class="badge badge-success">{{ $reseña->calificacion }}</span>
+                                            </h6>
+                                            <p class="card-text">{{ $reseña->comentario }}</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        @endforeach
-                    @endif
+                            @endforeach
+                        @endif
                     </div>
+
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
+@endsection

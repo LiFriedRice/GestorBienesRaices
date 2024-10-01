@@ -117,31 +117,35 @@
 					</li>
 					<li class="nav-item dropdown dropdown-lg">
 						<a class="nav-link dropdown-toggle dropdown-toggle-nocaret position-relative"
-							href="javascript:;" data-toggle="dropdown"> <span class="msg-count">6</span>
+							href="javascript:;" data-toggle="dropdown">
 							<i class="bx bx-comment-detail vertical-align-middle"></i>
 						</a>
 						<div class="dropdown-menu dropdown-menu-right">
 							<a href="javascript:;">
 								<div class="msg-header">
-									<h6 class="msg-header-title">6 New</h6>
-									<p class="msg-header-subtitle">Application Messages</p>
+									<p class="msg-header-subtitle">Mensajes</p>
 								</div>
 							</a>
 							<div class="header-message-list">
-								<a class="dropdown-item" href="javascript:;">
-									<div class="media align-items-center">
-										<div class="user-online">
-											<img src="https://via.placeholder.com/110x110" class="msg-avatar"
-												alt="user avatar">
+								@foreach($mensajes as $mensaje)
+									<a class="dropdown-item" href="javascript:;">
+										<div class="media align-items-center">
+											<div class="user-online">
+												<!-- Aquí puedes cambiar la imagen del avatar por una imagen real si tienes URLs de imágenes de los usuarios -->
+												<img src="https://via.placeholder.com/110x110" class="msg-avatar"
+													alt="user avatar">
+											</div>
+											<div class="media-body">
+												<h6 class="msg-name">
+													{{ $mensaje->remitente->name }}
+													<span
+														class="msg-time float-right">{{ $mensaje->created_at->diffForHumans() }}</span>
+												</h6>
+												<p class="msg-info">{{ $mensaje->mensaje }}</p>
+											</div>
 										</div>
-										<div class="media-body">
-											<h6 class="msg-name">Daisy Anderson <span class="msg-time float-right">5
-													sec
-													ago</span></h6>
-											<p class="msg-info">The standard chunk of lorem</p>
-										</div>
-									</div>
-								</a>
+									</a>
+								@endforeach
 							</div>
 							<a href="javascript:;">
 								<div class="text-center msg-footer">View All Messages</div>

@@ -20,16 +20,24 @@ Route::get('/', [PropiedadesController::class, 'MostrarProp'])->name('PaginaPrin
 Route::get('/Busqueda', [PropiedadesController::class, 'buscar'])->name('propiedades.buscar');
 
 // Ruta para crear una nueva propiedad
-Route::get('/Publicar', function () {return view('Propiedades.create');})->name('Publicacion');
+Route::get('/Publicar', function () {
+    return view('Propiedades.create'); })->name('Publicacion');
 //ruta de regreso 
-Route::get('/inicio', function () {return view('PaginaPrincipal');})->name('Regresarinicio');
+Route::get('/inicio', function () {
+    return view('PaginaPrincipal'); })->name('Regresarinicio');
 // Ruta para mostrar la propiedad
 Route::get('/propiedad/{id}', [PropiedadesController::class, 'Propshow'])->name('propiedadshow');
 
 // Ruta para almacenar el comentario
 Route::post('/comentarios', [PropiedadesController::class, 'almacenar'])->name('comentarios.store');
+
 // Ruta para mostrar la lista de propiedades
 Route::get('/listado', [PropiedadesController::class, 'Listado'])->name('Listado');
+
+// Ruta para el mensaje
+Route::get('/mensaje/{id}', [PropiedadesController::class, 'Mensajeshow'])->name('mensaje.create');
+// ruta enviar mensaje 
+Route::post('/enviar-mensaje', [PropiedadesController::class, 'enviar'])->name('enviar.mensaje');
 
 //ruta para mostrar perfil de usuario
 Route::get('/user/{id}', [PropiedadesController::class, 'Usershow'])->name('usershow');
@@ -43,6 +51,7 @@ Route::put('/propiedades/{id}', [PropiedadesController::class, 'Propupdate'])->n
 Route::put('/propiedades/{id}/eliminar', [PropiedadesController::class, 'Propdelete'])->name('propiedades.updateprop');
 
 Route::post('/propiedades', [PropiedadesController::class, 'CreateProp'])->name('propiedades.store');
+//ruta mostrar mensaje 
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),

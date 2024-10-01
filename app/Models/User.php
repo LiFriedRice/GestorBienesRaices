@@ -66,4 +66,12 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Reseñas::class, 'id_usuario', 'id');
     }
+    public function propiedades()
+    {
+        return $this->hasMany(Propiedades::class, 'id_usuario', 'id'); // Asegúrate de que 'id_usuario' sea el nombre correcto de la clave foránea
+    }
+    public function mensaje()
+    {
+        return $this->belongsTo(User::class, 'id_usuario_remitente', 'id'); // Cambia 'id_usuario_remitente' al nombre del campo correcto
+    }
 }

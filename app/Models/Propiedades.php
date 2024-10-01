@@ -16,7 +16,10 @@ class Propiedades extends Model
     {
         return $this->hasMany(Reseñas::class, 'id_propiedad', 'id_propiedad');
     }
-
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'id', 'id_propiedad'); // Asegúrate de que 'id_usuario' sea el nombre correcto de la clave foránea
+    }
     protected $table = 'propiedades';
     protected $primaryKey = 'id_propiedad';
 

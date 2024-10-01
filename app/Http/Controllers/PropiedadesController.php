@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Foto_videos;
+use App\Models\Mensajes;
 use App\Models\Propiedades;
 use App\Models\Tipo_Terrenos;
 use App\Models\User;
@@ -20,25 +21,44 @@ class PropiedadesController extends Controller
         // Obtener hasta 8 usuarios
         $Usuarios = User::take(8)->get();
 
+        $usuarioId = Auth::id();
+
+        // Obtener los mensajes donde id_usuario_destinatario sea igual al ID del usuario autenticado
+        $mensajes = Mensajes::where('id_usuario_destinatario', $usuarioId)
+            ->with('remitente') // Cargar la relación del usuario
+            ->get();
+
         // Retornar la vista con ambas colecciones
-        return view('PaginaPrincipal', compact('Propiedades', 'Usuarios'));
+        return view('PaginaPrincipal', compact('Propiedades', 'Usuarios', 'mensajes'));
     }
 
     public function buscar()
-{
-    // Realizar la búsqueda en la tabla propiedades
-    $propiedades = Propiedades::with('fotosVideos')->where('status', 1)->get();
+    {
+        // Realizar la búsqueda en la tabla propiedades
+        $usuarioId = Auth::id();
 
-    return view('Busqueda', compact('propiedades'));
-}
+        // Obtener los mensajes donde id_usuario_destinatario sea igual al ID del usuario autenticado
+        $mensajes = Mensajes::where('id_usuario_destinatario', $usuarioId)
+            ->with('remitente') // Cargar la relación del usuario
+            ->get();
+        $propiedades = Propiedades::with('fotosVideos')->where('status', 1)->get();
+
+        return view('Busqueda', compact('propiedades', 'mensajes'));
+        
+    }
     public function Propshow($id)
     {
+        $usuarioId = Auth::id();
+
+        // Obtener los mensajes donde id_usuario_destinatario sea igual al ID del usuario autenticado
+        $mensajes = Mensajes::where('id_usuario_destinatario', $usuarioId)
+            ->with('remitente') // Cargar la relación del usuario
+            ->get();
         $Propiedad = Propiedades::with(['fotosVideos', 'reseñas.user'])->where('id_propiedad', $id)->firstOrFail();
 
         // Verifica los datos de la propiedad
 
-
-        return view('Propiedades.propiedad', compact('Propiedad'));
+        return view('Propiedades.propiedad', compact('Propiedad','mensajes'));
     }
 
     public function Propupdateshow($id)
@@ -47,19 +67,31 @@ class PropiedadesController extends Controller
         $propiedad = Propiedades::with(['fotosVideos'])
             ->where('id_propiedad', $id) // Asegúrate de usar 'id_propiedad' aquí
             ->firstOrFail();
+            $usuarioId = Auth::id();
+
+        // Obtener los mensajes donde id_usuario_destinatario sea igual al ID del usuario autenticado
+        $mensajes = Mensajes::where('id_usuario_destinatario', $usuarioId)
+            ->with('remitente') // Cargar la relación del usuario
+            ->get();
 
         // Retorna la vista con los datos de la propiedad
-        return view('Propiedades.update', compact('propiedad'));
+        return view('Propiedades.update', compact('propiedad', 'mensajes'));
     }
     public function Myusershow()
     {
         $userId = auth()->user()->id; // Obtén el ID del usuario autenticado
         $Usuarios = User::findOrFail($userId); // Busca al usuario por su ID
+        $usuarioId = Auth::id();
+
+        // Obtener los mensajes donde id_usuario_destinatario sea igual al ID del usuario autenticado
+        $mensajes = Mensajes::where('id_usuario_destinatario', $usuarioId)
+            ->with('remitente') // Cargar la relación del usuario
+            ->get();
 
         // Obtén las propiedades publicadas por el usuario
         $Propiedades = Propiedades::where('id_usuario', $userId)->where('status', 1)->get();
 
-        return view('User.Myuser', compact('Usuarios', 'Propiedades')); // Retorna la vista con los datos del usuario y propiedades
+        return view('User.Myuser', compact('Usuarios', 'Propiedades','mensajes')); // Retorna la vista con los datos del usuario y propiedades
     }
 
     //mostrar perfil de propiedad
@@ -69,10 +101,16 @@ class PropiedadesController extends Controller
         $Usuarios = User::findOrFail($id);
 
         // Obtener las propiedades relacionadas con el usuario
-        $Propiedades = Propiedades::where('id_usuario', $Usuarios->id)->where('status', 1)->get(); // Usar $Usuarios->id
+        $Propiedades = Propiedades::where('id_usuario', $Usuarios->id)->where('status', 1)->get(); 
+        $usuarioId = Auth::id();
+
+        // Obtener los mensajes donde id_usuario_destinatario sea igual al ID del usuario autenticado
+        $mensajes = Mensajes::where('id_usuario_destinatario', $usuarioId)
+            ->with('remitente') // Cargar la relación del usuario
+            ->get();
 
         // Pasar los datos del usuario y las propiedades a la vista
-        return view('User.UserShow', compact('Usuarios', 'Propiedades'));
+        return view('User.UserShow', compact('Usuarios', 'Propiedades', 'mensajes'));
     }
 
 
@@ -97,7 +135,7 @@ class PropiedadesController extends Controller
             'calificacion' => $request->puntuacion,
             'comentario' => $request->comentario,
         ]);
-
+        
         // Redirige a la función Propshow pasando el ID del producto
         return redirect()->route('propiedadshow', ['id' => $request->id_propiedad])
             ->with('success', 'Comentario publicado con éxito.');
@@ -105,8 +143,15 @@ class PropiedadesController extends Controller
 
     public function Listado()
     {
+        $usuarioId = Auth::id();
+
+        // Obtener los mensajes donde id_usuario_destinatario sea igual al ID del usuario autenticado
+        $mensajes = Mensajes::where('id_usuario_destinatario', $usuarioId)
+            ->with('remitente') // Cargar la relación del usuario
+            ->get();
         $Propiedades = Propiedades::all();
-        return view('Propiedades.list', compact('Propiedades'));
+        return view('Propiedades.list', compact('Propiedades', 'mensajes'));
+        
     }
 
     public function CreateProp(Request $request)
@@ -146,7 +191,7 @@ class PropiedadesController extends Controller
         $data = $validatedData;
         $data['id_usuario'] = auth()->id(); // Añade el id del usuario autenticado
         $data['status'] = 1;
-        
+
         $propiedad = Propiedades::create($data);
 
 
@@ -233,7 +278,45 @@ class PropiedadesController extends Controller
 
         return redirect()->back()->with('error', 'Propiedad no encontrada.');
     }
+    // controlador de mensajeria 
+    public function Mensajeshow($id)
+    {
+        $Usuario = User::with(['propiedades'])->where('id', $id)->firstOrFail();
+        $usuarioId = Auth::id();
 
+        // Obtener los mensajes donde id_usuario_destinatario sea igual al ID del usuario autenticado
+        $mensajes = Mensajes::where('id_usuario_destinatario', $usuarioId)
+            ->with('remitente') // Cargar la relación del usuario
+            ->get();
+        // Verifica los datos de la propiedad
 
+        return view('Propiedades.mensaje.create', compact('Usuario', 'mensajes'));
+    }
+
+    //enviar mensaje 
+    public function enviar(Request $request)
+    {
+        // Validación de datos
+        $request->validate([
+            'destinatarioId' => 'required|string|max:255',
+            'propiedadId' => 'required|string|max:255',
+            'mensajePersonalizado' => 'nullable|string',
+        ]);
+
+        // Obtener el ID del usuario autenticado
+        $userId = auth()->user()->id;
+
+        // Guardar el mensaje en la base de datos
+        Mensajes::create([
+            'id_usuario_remitente' => $userId,
+            'id_usuario_destinatario' => $request->destinatarioId,
+            'id_propiedad' => $request->propiedadId,
+            'mensaje' => $request->mensajePersonalizado ?? 'Estoy interesado en la propiedad',
+        ]);
+
+        // Redirigir de vuelta al formulario con un mensaje de éxito
+        return redirect()->back()->with('success', 'El mensaje se envió con éxito.');
+    }
+    //mostrar controlador 
 
 }
