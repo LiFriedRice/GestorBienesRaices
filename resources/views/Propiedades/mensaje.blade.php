@@ -20,20 +20,20 @@
         <form id="contactForm" method="POST" action="{{ route('enviar.mensaje') }}">
             @csrf
 
-            <!-- Usuario destinatario -->
+            <!-- Propiedad destinatario -->
             <div class="mb-3">
                 <label for="destinatario" class="form-label">Destinatario</label>
-                <input type="text" class="form-control" id="destinatario" value="{{ $Usuario->name }}" readonly>
+                <input type="text" class="form-control" id="destinatario" value="{{ $usuario->name }}" readonly>
             </div>
 
-            <input type="hidden" name="destinatarioId" value="{{ $Usuario->id }}">
+            <input type="hidden" name="destinatarioId" value="{{ $usuario->id }}">
             <input type="hidden" name="propiedadId"
-                value="{{ $Usuario->propiedades->pluck('id_propiedad')->implode(', ') }}">
+                value="{{ $Propiedad->id_propiedad }}">
 
             <div class="mb-3">
                 <label for="propiedad" class="form-label">Propiedad</label>
                 <input type="text" class="form-control" id="propiedad"
-                    value="{{ $Usuario->propiedades->pluck('titulo')->implode(', ') }}" readonly>
+                    value="{{ $Propiedad->titulo}}" readonly>
             </div>
 
             <div class="mb-3">

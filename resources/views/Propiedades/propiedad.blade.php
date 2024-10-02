@@ -69,10 +69,11 @@
                             <p><strong>Estado del Inmueble:</strong> {{ ucfirst($Propiedad->estado_inmueble) }}</p>
 
                             <!-- Botón para abrir el modal de contacto -->
-                            <a href="{{ route('mensaje.create', ['id' => $Propiedad->id_propiedad]) }}"
+                            <a href="{{ route('mensaje.show', ['id' => $Propiedad->id_propiedad]) }}"
                                 class="btn btn-primary mt-3 mb-3">
                                 Contactar con el comprador
                             </a>
+
                         </div>
                     </div>
                     <div class="row">
@@ -83,29 +84,46 @@
 
                     <!-- Sección de comentarios -->
                     <h3>Comentarios</h3>
-                    <form action="{{ route('comentarios.store') }}" method="POST">
-                        @csrf
-                        <input type="hidden" name="id_propiedad" value="{{ $Propiedad->id_propiedad }}">
-                        <div class="form-group">
-                            <label for="puntuacion">Puntuación</label>
-                            <select class="form-control" id="puntuacion" name="puntuacion" required>
-                                <option value="">Selecciona una puntuación</option>
-                                <option value="1">1 - Muy Malo</option>
-                                <option value="2">2 - Malo</option>
-                                <option value="3">3 - Regular</option>
-                                <option value="4">4 - Bueno</option>
-                                <option value="5">5 - Excelente</option>
-                            </select>
-                        </div>
+                    @if(Auth::check())
+                        <form id="comentarioForm" action="{{ route('comentarios.store') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="id_propiedad" value="{{ $Propiedad->id_propiedad }}">
+                            <div class="form-group">
+                                <label for="puntuacion">Puntuación</label>
+                                <select class="form-control" id="puntuacion" name="puntuacion" required>
+                                    <option value="">Selecciona una puntuación</option>
+                                    <option value="1">1 - Muy Malo</option>
+                                    <option value="2">2 - Malo</option>
+                                    <option value="3">3 - Regular</option>
+                                    <option value="4">4 - Bueno</option>
+                                    <option value="5">5 - Excelente</option>
+                                </select>
+                            </div>
 
-                        <div class="form-group">
-                            <label for="comentario">Comentario</label>
-                            <textarea class="form-control" id="comentario" name="comentario" rows="3"
-                                placeholder="Escribe tu comentario aquí" required></textarea>
-                        </div>
+                            <div class="form-group">
+                                <label for="comentario">Comentario</label>
+                                <textarea class="form-control" id="comentario" name="comentario" rows="3"
+                                    placeholder="Escribe tu comentario aquí" required></textarea>
+                            </div>
 
-                        <button type="submit" class="btn btn-primary">Publicar Comentario</button>
-                    </form>
+                            <button type="submit" class="btn btn-primary">Publicar Comentario</button>
+                        </form>
+                    @else
+                        <p>Debes iniciar sesión para publicar un comentario. <a href="{{ route('login') }}">Inicia sesión</a>.<a href="{{ route('register') }}">Registrate</a></p>
+                    @endif
+
+                    @if(session('error'))
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
+                        </div>
+                    @endif
+
+                    @if(session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+
 
                     <div class="container mt-5">
                         <!-- Mostrar los comentarios -->
@@ -134,7 +152,18 @@
             </div>
         </div>
     </div>
+    <script>
+        function checkLogin() {
+            // Verifica si el usuario está autenticado
+            var isAuthenticated = {{ auth()->check() ? 'true' : 'false' }};
+
+            if (!isAuthenticated) {
+                // Previene el envío del formulario
+                event.preventDefault();
+                // Muestra el modal
+                $('#loginWarningModal').modal('show');
+            }
+            return isAuthenticated; // Permite el envío si está autenticado
+        }
+    </script>
 </div>
-
-
-@endsection

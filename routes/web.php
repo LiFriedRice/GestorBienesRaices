@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PropiedadesController;
 
+use App\Http\Controllers\Usercontroller;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -35,8 +37,9 @@ Route::post('/comentarios', [PropiedadesController::class, 'almacenar'])->name('
 Route::get('/listado', [PropiedadesController::class, 'Listado'])->name('Listado');
 
 // Ruta para el mensaje
-Route::get('/mensaje/{id}', [PropiedadesController::class, 'Mensajeshow'])->name('mensaje.create');
+Route::get('/mensaje/{id}', [Usercontroller::class, 'Mensajeshow'])->name('mensaje.show');
 // ruta enviar mensaje 
+
 Route::post('/enviar-mensaje', [PropiedadesController::class, 'enviar'])->name('enviar.mensaje');
 
 //ruta para mostrar perfil de usuario
@@ -59,4 +62,8 @@ Route::middleware([
 ])->group(function () {
     Route::get('/PaginaPrincipal', [PropiedadesController::class, 'MostrarProp'])->name('PaginaPrincipal');
 });
+Route::get('/verificar-auth', function () {
+    return response()->json(['authenticated' => Auth::check()]);
+})->name('verificar.auth');
+
 
